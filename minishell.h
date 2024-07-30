@@ -24,6 +24,7 @@ typedef struct s_utils
     int d;
     int k;
     int l;
+    int j;
 }	t_utils;
 
 typedef struct s_mini

@@ -48,21 +48,20 @@ void find_num_redirect(char *args, t_mini   *mini, int dq, int sq)
 void take_name(char *args, t_mini *mini)
 {
     int i;
-	int j;
 	
     i = 0;
-	j = 0;
     mini->redirect->len = 0;
+    mini->utils->j = 0;
     while(args[i] && (args[i] == ' ' || args[i] == '\t'))
 	{
         i++;
-		j++;
+        mini->utils->j++;
 	}
     mini->redirect->start += i;
     while(args[i] && args[i] != ' ' && args[i] != '\t' && args[i] != '<' && args[i] != '>')
     {
         i++;
-		j++;
+        mini->utils->j++;
         mini->redirect->len += 1;
     }
 }
@@ -87,14 +86,14 @@ void taking_arg_redirect(char *str, t_mini *mini)
             mini->redirect->start = i + 1;
             take_name(str + (i + 1), mini);
             mini->input[mini->utils->z++] = ft_substr(str, mini->redirect->start, mini->redirect->len);
-			fill_space(str, i, mini->redirect->len + 1);
+			fill_space(str, i, mini->utils->j + 1); 
         }
         else if(str[i] == '>' && str[i + 1] != '>')
         {
             mini->redirect->start = i + 1;
             take_name(str + (i + 1), mini);
             mini->output[mini->utils->d++] = ft_substr(str, mini->redirect->start, mini->redirect->len);
-			fill_space(str, i, mini->redirect->len + 1);
+			fill_space(str, i, mini->utils->j + 1);
 
         }
         else if(str[i] == '<' && str[i + 1] == '<')
@@ -102,7 +101,7 @@ void taking_arg_redirect(char *str, t_mini *mini)
             mini->redirect->start = i + 2;
             take_name(str + (i + 2), mini);
             mini->heredoc[mini->utils->k++] = ft_substr(str, mini->redirect->start, mini->redirect->len);
-			fill_space(str, i, mini->redirect->len + 2);
+			fill_space(str, i,mini->utils->j + 2);
             i++;
         }
         else if(str[i] == '>' && str[i + 1] == '>')
@@ -110,7 +109,7 @@ void taking_arg_redirect(char *str, t_mini *mini)
             mini->redirect->start = i + 2;
             take_name(str + (i + 2), mini); //burada ayarlanmış ismin içerisinde tırnaklar da olabileceği için, tırnak silme fonksiyonunu çalıştırdıktan sonra struct yapısına o ismi atamak gerekiyor.
             mini->append[mini->utils->l++] = ft_substr(str, mini->redirect->start, mini->redirect->len);
-			fill_space(str, i, mini->redirect->len + 2);
+			fill_space(str, i, mini->utils->j + 2);
             i++;
         }
 		printf("%s\n", str);
