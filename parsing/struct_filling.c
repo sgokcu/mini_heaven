@@ -1,18 +1,4 @@
-
 #include "../minishell.h"
-
-/*
-
-< a.txt < b.txt ls > c.txt >> d.txt -l arg
-
-ls -l arg
-
-
-< a.txt < b.txt -l
-
-a.txt -l
-
-*/
 
 void find_num_redirect(char *args, t_mini   *mini, int dq, int sq)
 {
@@ -66,7 +52,7 @@ void take_name(char *args, t_mini *mini)
     }
 }
 
-void taking_arg_redirect(char *str, t_mini *mini)
+void taking_arg_redirect(char *str, t_mini *mini, int sq, int dq)
 {
     int i;
     
@@ -81,14 +67,15 @@ void taking_arg_redirect(char *str, t_mini *mini)
     allocate(mini);
     while(str[i] && (quote_check(str[i], 0, 0), 1))
     {
-        if(str[i] == '<' && str[i + 1] != '<')
+        if(str[i] == '<' && str[i + 1] != '<' && (dq % 2 == 0) && (sq % 2 == 0))
         {
             mini->redirect->start = i + 1;
             take_name(str + (i + 1), mini);
             mini->input[mini->utils->z++] = ft_substr(str, mini->redirect->start, mini->redirect->len);
 			fill_space(str, i, mini->utils->j + 1); 
+            printf("str: %s\n", str);
         }
-        else if(str[i] == '>' && str[i + 1] != '>')
+        else if(str[i] == '>' && str[i + 1] != '>' && (dq % 2 == 0) && (sq % 2 == 0))
         {
             mini->redirect->start = i + 1;
             take_name(str + (i + 1), mini);
@@ -96,7 +83,7 @@ void taking_arg_redirect(char *str, t_mini *mini)
 			fill_space(str, i, mini->utils->j + 1);
 
         }
-        else if(str[i] == '<' && str[i + 1] == '<')
+        else if(str[i] == '<' && str[i + 1] == '<' && (dq % 2 == 0) && (sq % 2 == 0))
         {
             mini->redirect->start = i + 2;
             take_name(str + (i + 2), mini);
@@ -104,7 +91,7 @@ void taking_arg_redirect(char *str, t_mini *mini)
 			fill_space(str, i,mini->utils->j + 2);
             i++;
         }
-        else if(str[i] == '>' && str[i + 1] == '>')
+        else if(str[i] == '>' && str[i + 1] == '>' && (dq % 2 == 0) && (sq % 2 == 0))
         {
             mini->redirect->start = i + 2;
             take_name(str + (i + 2), mini); //burada ayarlanmış ismin içerisinde tırnaklar da olabileceği için, tırnak silme fonksiyonunu çalıştırdıktan sonra struct yapısına o ismi atamak gerekiyor.
@@ -112,7 +99,6 @@ void taking_arg_redirect(char *str, t_mini *mini)
 			fill_space(str, i, mini->utils->j + 2);
             i++;
         }
-		printf("%s\n", str);
         i++;
     }
 }
@@ -162,14 +148,14 @@ void allocate(t_mini *mini)
 void placing(char **args, t_mini *mini)
 {
     int i;
+   
     t_mini *temp;
 
     i = 0;
-
     temp = mini;
     while(args[i])
     {
-        taking_arg_redirect(args[i], mini);
+        taking_arg_redirect(args[i], mini, 0, 0);
         if (args[i + 1])
         {
             mini->next = malloc(sizeof(t_mini));
