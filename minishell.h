@@ -18,6 +18,14 @@ typedef struct s_redirect
     int len;
 }   t_redirect;
 
+typedef struct s_utils
+{
+	int z;
+    int d;
+    int k;
+    int l;
+}	t_utils;
+
 typedef struct s_mini
 {
     char *arg;
@@ -28,6 +36,7 @@ typedef struct s_mini
     char **append;
     struct s_mini *next;
     struct s_redirect *redirect;
+	struct s_utils *utils;
 }   t_mini;
 
 void    take_env(t_mini *mini);
@@ -35,6 +44,9 @@ char    **mm_split(char *temp);
 void    placing(char **args, t_mini *mini);
 void    print_env(t_mini *mini, int status);
 void    quote_check(char temp, int *squotes, int *dquotes);
+void    allocate(t_mini *mini);
+void	fill_space(char *str, int start, int len);
+
 
 
 
