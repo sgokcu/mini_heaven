@@ -20,6 +20,8 @@ typedef struct s_redirect
 
 typedef struct s_utils
 {
+    int dquote;
+    int squote;
 	int z;
     int d;
     int k;
@@ -29,7 +31,7 @@ typedef struct s_utils
 
 typedef struct s_mini
 {
-    char *arg;
+    char **arg;
     char **env;
     char **input;
     char **output;
@@ -47,6 +49,7 @@ void    print_env(t_mini *mini, int status);
 void    quote_check(char temp, int *squotes, int *dquotes);
 void    allocate(t_mini *mini);
 void	fill_space(char *str, int start, int len);
+char    *delete_quotes(char *str, t_mini *mini);
 
 
 
