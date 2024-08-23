@@ -7,6 +7,7 @@ int	main()
 	char	**args;
 	char	*temp;
 	char	*temp2;
+	char	*temp3;
 	t_mini	mini;
 
 	g_global_exit = 0;
@@ -23,15 +24,15 @@ int	main()
 		add_history(temp);
 		temp2 = ft_strtrim(temp, " \t");
 		free(temp);
-		ft_signal_regulator(MAIN_P2);
 		if (!is_quotes_closed(temp2))
 			continue ;
-		is_dollar_exist_and_valid(temp2, &mini);
+		ft_signal_regulator(MAIN_P2);
 		if (!pipe_check(temp2))
 			continue ;
 		if (!is_valid_name(temp2, &mini))
 			continue ;
-		args = mm_split(temp2);
+		temp3 = is_dollar_exist_and_valid(temp2, &mini);
+		args = mm_split(temp3);
 		placing(args, &mini);
 		read_and_exec(&mini, command_list_count(&mini));
 	}
