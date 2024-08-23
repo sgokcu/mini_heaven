@@ -6,21 +6,11 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:10 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/23 14:02:10 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/08/23 18:41:33 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	check_same(char *s1, char *s2)
-{
-	if (!s1 || !s2)
-		return (1);
-	if (ft_strncmp(s1, s2, ft_strlen(s1)) == 0 \
-	&& ft_strncmp(s2, s1, ft_strlen(s2)) == 0)
-		return (0);
-	return (1);
-}
 
 int	command_list_count(t_mini *mini)
 {
@@ -35,6 +25,17 @@ int	command_list_count(t_mini *mini)
 		temp = temp->next;
 	}
 	return (i);
+}
+
+void	ft_main_signal2(int signal)
+{
+	if (signal == SIGINT)
+	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		g_global_exit = 1;
+	}
 }
 
 void	ft_main_signal(int signal)
@@ -75,6 +76,11 @@ void	ft_signal_regulator(int status)
 	else if (status == HEREDOC_P)
 	{
 		signal(SIGINT, &ft_heredoc_signal);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (status == MAIN_P2)
+	{
+		signal(SIGINT, &ft_main_signal2);
 		signal(SIGQUIT, SIG_IGN);
 	}
 }

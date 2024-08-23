@@ -408,6 +408,8 @@ void	placing(char **args, t_mini *mini)
 	temp = mini;
 	while (args[i])
 	{
+		if (!args[i][0])
+			return ;
 		mini->arg = ft_strdup(args[i]);
 		taking_arg_redirect(args[i], mini, 0, 0);
 		take_cmd(args[i], mini);

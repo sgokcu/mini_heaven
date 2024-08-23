@@ -23,6 +23,7 @@ int	main()
 		add_history(temp);
 		temp2 = ft_strtrim(temp, " \t");
 		free(temp);
+		ft_signal_regulator(MAIN_P2);
 		if (!is_quotes_closed(temp2))
 			continue ;
 		is_dollar_exist_and_valid(temp2, &mini);

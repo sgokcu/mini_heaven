@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:27:36 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/21 14:28:21 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/08/23 18:39:10 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,14 @@ void	pipe_checker(int fd[2])
 		perror("pipe error");
 		exit(127);
 	}
+}
+
+int	check_same(char *s1, char *s2)
+{
+	if (!s1 || !s2)
+		return (1);
+	if (ft_strncmp(s1, s2, ft_strlen(s1)) == 0 \
+	&& ft_strncmp(s2, s1, ft_strlen(s2)) == 0)
+		return (0);
+	return (1);
 }

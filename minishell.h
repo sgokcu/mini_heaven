@@ -28,6 +28,7 @@
 # define CHILD_P 9
 # define MAIN_P 10
 # define HEREDOC_P 11
+# define MAIN_P2 12
 
 extern int	g_global_exit;
 
@@ -137,6 +138,7 @@ int			is_fileordirectory(const char *str);
 
 void		ft_signal_regulator(int status);
 void		ft_main_signal(int signal);
+void		ft_main_signal2(int signal);
 void		ft_heredoc_signal(int signal);
 
 char		*make_lower(char *str);
