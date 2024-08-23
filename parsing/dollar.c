@@ -11,6 +11,8 @@ char *is_dollar_exist_and_valid(char *str, t_mini *mini)
     char *s2;
 	char *line;
 	char *val;
+    char *value;
+
 
 
     sq = 0;
@@ -37,7 +39,9 @@ char *is_dollar_exist_and_valid(char *str, t_mini *mini)
             	line = ft_strjoin(s1, s2);
             else
 			{
-				hold = ft_strjoin(s1, val);
+                value = val_redirect(val, mini);
+                free(val);
+				hold = ft_strjoin(s1, value);
 				line = ft_strjoin(hold, s2);
 			}
 			free(str);
@@ -52,6 +56,60 @@ char *is_dollar_exist_and_valid(char *str, t_mini *mini)
         i++;
     }
 	return(str);
+}
+
+char    *val_redirect(char *str, t_mini *mini)
+{
+    int i;
+    int j;
+    int redirect;
+    char *val;
+
+    i = 0;
+    j = 0;
+    redirect = 0;
+    mini->utils->sq = 0;
+    mini->utils->dq = 0;
+    while(str[i] && (quote_check(str[i], &mini->utils->sq, &mini->utils->dq), 1))
+    {
+        if(str[i] == '<' && mini->utils->sq % 2 == 0)
+            redirect++;
+        if(str[i] == '>' && mini->utils->sq % 2 == 0)
+            redirect++;
+        if(str[i] == '|' && mini->utils->sq % 2 == 0)
+            redirect++;
+        i++;
+    }
+    val = malloc((ft_strlen(str) + (redirect * 2) + 1));
+    i = 0;
+    mini->utils->sq = 0;
+    mini->utils->dq = 0;
+    while(str[i] && (quote_check(str[i], &mini->utils->sq, &mini->utils->dq), 1))
+    {
+        if(str[i] == '<' && mini->utils->sq % 2 == 0)
+        {
+            val[j++] = 34;
+            val[j++] = str[i];
+            val[j++] = 34;
+        }
+        else if(str[i] == '>' && mini->utils->sq % 2 == 0)
+        {
+            val[j++] = 34;
+            val[j++] = str[i];
+            val[j++] = 34;
+        }
+        else if(str[i] == '|' && mini->utils->sq % 2 == 0)
+        {
+            val[j++] = 34;
+            val[j++] = str[i];
+            val[j++] = 34;
+        }
+        else
+            val[j++] = str[i];
+        i++;
+    }
+    val[j] = '\0';
+    return (val);
 }
 
 char	*env_contains(char *str, t_mini *mini)

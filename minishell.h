@@ -92,6 +92,8 @@ char		*dollar_business(char *str, t_mini *mini, int *i);
 void		take_name_for_dollar(char *str, t_mini *mini);
 void		struct_business(t_mini *mini);
 char		*env_contains(char *str, t_mini *mini);
+char		*val_redirect(char *str, t_mini *mini);
+
 
 //benim eklediklerim
 void		take_flag_arg(t_mini *mini, char *str);
