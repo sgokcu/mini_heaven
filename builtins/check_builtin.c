@@ -43,6 +43,10 @@ void	check_builtin(t_mini *mini, int i)
 		ft_exit(mini, i);
 	else if (mini->cmd && check_same(mini->cmd, "echo") == 0)
 		ft_echo(mini);
+	else if (mini->cmd && check_same(mini->cmd, "export") == 0)
+		ft_export(mini);
+	//else if (mini->cmd && check_same(mini->cmd, "unset") == 0)
+	//	ft_unset(mini);
 }
 
 void	check_builtin_status(t_mini *mini)

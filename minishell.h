@@ -71,7 +71,7 @@ typedef struct s_mini
 }	t_mini;
 
 void		take_env(t_mini *mini);
-char		**mm_split(char *temp);
+char		**mm_split(char *temp, char c);
 void		placing(char **args, t_mini *mini);
 void		print_env(t_mini *mini, int status);
 void		quote_check(char temp, int *squotes, int *dquotes);
@@ -93,6 +93,15 @@ void		take_name_for_dollar(char *str, t_mini *mini);
 void		struct_business(t_mini *mini);
 char		*env_contains(char *str, t_mini *mini);
 char		*val_redirect(char *str, t_mini *mini);
+void		ft_export(t_mini *mini);
+int			count_environ(char **environ);
+void		put_env(char *str, t_mini *mini);
+int			env_count_full(t_mini *mini);
+void		print_env(t_mini *mini, int status);
+
+
+
+
 
 
 //benim eklediklerim

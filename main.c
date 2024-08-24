@@ -32,7 +32,7 @@ int	main()
 		if (!is_valid_name(temp2, &mini))
 			continue ;
 		temp3 = is_dollar_exist_and_valid(temp2, &mini);
-		args = mm_split(temp3);
+		args = mm_split(temp3, '|');
 		placing(args, &mini);
 		read_and_exec(&mini, command_list_count(&mini));
 	}
