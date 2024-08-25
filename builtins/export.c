@@ -1,12 +1,12 @@
 #include "../minishell.h"
 
-
 void	start_exp(t_mini *mini)
 {
 	char **keep;
 	int i;
 	int j;
 	int control;
+	char *hold;
 
 	i = 0;
 	j = 0;
@@ -49,12 +49,33 @@ void	start_exp(t_mini *mini)
 		}
 		else
 		{
-			printf("hold: -%s-\n", export_business(keep[i], mini));
-			put_env(keep[i], mini);
+			hold =  export_business(keep[i], mini);
+			if(does_env_have(hold, mini))
+			{
+				free(mini->env[does_env_have(hold, mini)]);
+				mini->env[does_env_have(hold, mini)] = delete_quotes(ft_strdup(keep[i]), mini);
+			}
+			else
+			{
+				put_env(delete_quotes(ft_strdup(keep[i]), mini), mini);
+			}
 			i++;
 		}
 	}
-	print_env(mini, 8);
+}
+
+int does_env_have(char *str, t_mini *mini)
+{
+	int i;
+
+	i = 0;
+	while (mini->env[i])
+    {
+        if(!ft_strncmp(str, mini->env[i], ft_strlen(str)))
+			return (i);
+		i++;
+    }
+	return (0);
 }
 
 void take_name_for_export(char *str, t_mini *mini)
@@ -74,14 +95,15 @@ void take_name_for_export(char *str, t_mini *mini)
         i++;
 		mini->redirect->len += 1;
     }
+	free(str);
 }
 
 char *export_business(char *str, t_mini *mini)
 {
-    char *hold;
+	char *hold;
 
     take_name_for_export(delete_quotes(ft_strdup(str), mini), mini);
-    hold = ft_substr(str, mini->redirect->start, mini->redirect->len);
+    hold = ft_substr(delete_quotes(ft_strdup(str), mini), mini->redirect->start, mini->redirect->len);
     return (hold);
 }
 
@@ -143,3 +165,4 @@ void	ft_export(t_mini *mini)
 	else
 		print_env(mini, 1);
 }
+

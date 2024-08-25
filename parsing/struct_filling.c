@@ -413,7 +413,8 @@ void	placing(char **args, t_mini *mini)
 		mini->arg = ft_strdup(args[i]);
 		taking_arg_redirect(args[i], mini, 0, 0);
 		take_cmd(args[i], mini);
-		args[i] = delete_quotes(args[i], mini);
+		if (check_same(mini->cmd, "export") && check_same(mini->cmd, "unset"))
+			args[i] = delete_quotes(args[i], mini);
 		take_flag_arg(mini, args[i]);
 		status_regulator(mini, 0, 0, 0);
 		//print_arg(mini);

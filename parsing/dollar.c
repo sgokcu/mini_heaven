@@ -27,7 +27,6 @@ char *is_dollar_exist_and_valid(char *str, t_mini *mini)
         {
             fill_space(str, i, 1);
             hold = delete_quotes(str, mini);
-            printf("%s\n", hold);
         }
         else if(str[i] == '$' && sq % 2 == 0)
         {
@@ -36,20 +35,22 @@ char *is_dollar_exist_and_valid(char *str, t_mini *mini)
             s2 = ft_substr(str, i + mini->redirect->len + 1, ft_strlen(str + (i + mini->redirect->len)));
             val = env_contains(hold, mini);
             if (!val)
+            {
             	line = ft_strjoin(s1, s2);
+            }
             else
 			{
                 value = val_redirect(val, mini);
                 free(val);
 				hold = ft_strjoin(s1, value);
 				line = ft_strjoin(hold, s2);
+                free(hold);
 			}
 			free(str);
 			str = line;
-			printf("-%s-\n", line);
+            printf("str: %s\n", str);
 			free(s1);
 			free(s2);
-			free(hold);
 			i = 0;
 			continue ;
         }
@@ -138,11 +139,10 @@ void take_name_for_dollar(char *str, t_mini *mini)
 
     i = 0;
 	mini->redirect->start += i;
+	mini->redirect->len = 0;
     while (str[i])
     {
-        if((str[i] == ' ' || str[i] == '\t') || (str[i] == 34 || str[i] == 39
-        || str[i] == '-' || str[i] == '?' || str[i] == '<' || str[i] == '>'
-        || str[i] == '?' || str[i] == '-' || str[i] == '$'))
+        if(!(ft_isalnum(str[i]) || str[i] == '_')) //$1a örneğinde çalışmıyor.
             break ;
         i++;
 		mini->redirect->len += 1;

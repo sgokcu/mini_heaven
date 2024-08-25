@@ -10,6 +10,7 @@ int	main()
 	char	*temp3;
 	t_mini	mini;
 
+	mini.env = 0;
 	g_global_exit = 0;
 	take_env(&mini);
 	while (1)

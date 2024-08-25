@@ -101,6 +101,8 @@ void		print_env(t_mini *mini, int status);
 void		free_env(char **envi);
 void		take_name_for_export(char *str, t_mini *mini);
 char		*export_business(char *str, t_mini *mini);
+int			does_env_have(char *str, t_mini *mini);
+void		print_env(t_mini *mini, int status);
 
 
 
