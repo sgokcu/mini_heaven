@@ -217,7 +217,7 @@ char	*delete_quotes(char *str, t_mini *mini)
 			hold[j++] = str[i++];
 	}
 	hold[j] = '\0';
-	free (str);
+	free(str);
 	return (hold);
 }
 

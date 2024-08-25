@@ -8,7 +8,7 @@ SRC	=	main.c environment.c parsing/divide_prs.c  parsing/dollar.c parsing/struct
 
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -rf
 LIBFT = lib/libft/libft.a
 READLINE = readline

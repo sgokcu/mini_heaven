@@ -49,6 +49,7 @@ void	start_exp(t_mini *mini)
 		}
 		else
 		{
+			printf("hold: -%s-\n", export_business(keep[i], mini));
 			put_env(keep[i], mini);
 			i++;
 		}
@@ -56,11 +57,67 @@ void	start_exp(t_mini *mini)
 	print_env(mini, 8);
 }
 
+void take_name_for_export(char *str, t_mini *mini)
+{
+    int i;
+
+    i = 0;
+	mini->redirect->start += i;
+	mini->redirect->len = 0;
+    while (str[i])
+    {
+        if(str[i] == '=')
+		{
+			mini->redirect->len += 1;
+            break ;
+		}
+        i++;
+		mini->redirect->len += 1;
+    }
+}
+
+char *export_business(char *str, t_mini *mini)
+{
+    char *hold;
+
+    take_name_for_export(delete_quotes(ft_strdup(str), mini), mini);
+    hold = ft_substr(str, mini->redirect->start, mini->redirect->len);
+    return (hold);
+}
+
+void	env_recent(char **envi, t_mini *mini)
+{
+	int	i;
+
+	mini->env = malloc(sizeof(char *) * (count_environ(mini->env) + 2));
+	i = 0;
+	while (envi[i]) 
+	{
+		mini->env[i] = ft_strdup(envi[i]);
+		i++;
+	}
+	mini->env[i] = NULL;
+	free_env(envi);
+}
+
+void free_env(char **envi)
+{
+	int i;
+
+	i = 0;
+	while(envi[i])
+	{
+		free(envi[i]);
+		envi[i] = NULL;
+		i++;
+	}
+	free(envi);
+}
 void put_env(char *str, t_mini *mini)
 {
 	int d;
 
-	take_env(mini);
+	env_recent(mini->env, mini);
 	d = env_count_full(mini);
 	mini->env[d] = ft_strdup(str);
 	mini->env[d + 1] = NULL;

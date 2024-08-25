@@ -138,7 +138,7 @@ void take_name_for_dollar(char *str, t_mini *mini)
 
     i = 0;
 	mini->redirect->start += i;
-    while (str[i] && (quote_check(str[i], &mini->utils->sq, &mini->utils->dq), 1))
+    while (str[i])
     {
         if((str[i] == ' ' || str[i] == '\t') || (str[i] == 34 || str[i] == 39
         || str[i] == '-' || str[i] == '?' || str[i] == '<' || str[i] == '>'
