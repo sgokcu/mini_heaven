@@ -183,6 +183,7 @@ void		ft_echo(t_mini *mini);
 void		echo_with_arg(t_mini *mini);
 void		echo_flag_control(char **arg, int *i);
 int			flag_control(char *arg);
+int			execute_error(char *command, int i);
 
 
 

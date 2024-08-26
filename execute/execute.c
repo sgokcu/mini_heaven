@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:10:04 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/23 18:48:24 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/08/26 18:43:43 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,20 @@ void	run_cmd(t_mini *mini, char **command)
 	if (!command[0])
 		return ;
 	if (check_same(command[0], "") == 0)
-	{
-		printf("minishell: %s: No such file or directory\n", command[0]);
-		g_global_exit = 127;
-		return ;
-	}
+		if (execute_error(command[0], 0))
+			return ;
 	if (strchr(command[0], '/'))
 	{
-		if (access(command[0], X_OK))
-		{
-			printf("minishell: %s: No such file or directory\n", command[0]);
-			g_global_exit = 127;
-			exit(127);
-		}
 		path = command[0];
+		if (ft_isdirectory(path))
+			if (execute_error(path, 2))
+				return ;
+		if (!is_fileordirectory(path))
+			if (execute_error(path, 0))
+				return ;
+		if (access(command[0], X_OK))
+			if (execute_error(path, 1))
+				return ;
 	}
 	else
 		path = get_cmd_path(mini, command, NULL, NULL);
