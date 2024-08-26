@@ -270,6 +270,7 @@ int is_quotes_closed(char *str)
 	if(sq % 2 != 0 || dq % 2 != 0)
 	{
 		printf("dquotes!\n");
+		g_global_exit = 258;
 		return (0);
 	}
 	return (1);
@@ -371,6 +372,7 @@ int pipe_check(char *str)
 		if(str[i] == '|' && control == 0)
 		{
 			printf("minishell: syntax error near unexpected token `|'\n");
+			g_global_exit = 258;
 			return (0);
 		}
 		else if(str[i] == '|' && str[i + 1] != '\0')
@@ -383,6 +385,7 @@ int pipe_check(char *str)
 			return (1);
 		else
 		{
+			g_global_exit = 258;
 			printf("minishell: syntax error near unexpected token `|'\n");
 			return (0);
 		}

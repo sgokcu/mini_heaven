@@ -2,11 +2,11 @@
 
 void	start_exp(t_mini *mini)
 {
-	char **keep;
-	int i;
-	int j;
-	int control;
-	char *hold;
+	char	**keep;
+	int		i;
+	int		j;
+	int		control;
+	char	*hold;
 
 	i = 0;
 	j = 0;
@@ -78,7 +78,7 @@ int does_env_have(char *str, t_mini *mini)
 	return (0);
 }
 
-void take_name_for_export(char *str, t_mini *mini)
+void	take_name_for_export(char *str, t_mini *mini)
 {
     int i;
 
