@@ -41,7 +41,6 @@ void	struct_business(t_mini *mini)
 	mini->utils->k = 0;
 	mini->utils->z = 0;
 	mini->utils->l = 0;
-	mini->next = NULL;
 	mini->append = NULL;
 	mini->output = NULL;
 	mini->input = NULL;
@@ -428,6 +427,7 @@ void	placing(char **args, t_mini *mini)
 			mini->next->env = mini->env;
 			mini = mini->next;
 		}
+		mini->next = NULL;
 		i++;
 	}
 	mini = temp;

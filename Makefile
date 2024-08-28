@@ -4,7 +4,7 @@ SRC	=	main.c environment.c parsing/divide_prs.c  parsing/dollar.c parsing/struct
 		execute/execute.c execute/read_struct.c execute/child.c utils/execute_utils1.c builtins/check_builtin.c \
 		builtins/cd.c builtins/pwd.c builtins/exit.c builtins/echo.c utils/cd_utils.c utils/execute_utils2.c \
 		execute/heredoc.c execute/redirects.c utils/redirect_utils.c utils/execute_utils3.c utils/pars_utils1.c \
-		utils/pars_utils2.c  builtins/export.c
+		utils/pars_utils2.c  builtins/export.c builtins/unset.c utils/execute_utils4.c
 
 
 CC = gcc

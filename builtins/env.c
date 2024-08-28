@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	print_env(t_mini *mini, int status)
+void	ft_env(t_mini *mini, int status)
 {
 	int	i;
 

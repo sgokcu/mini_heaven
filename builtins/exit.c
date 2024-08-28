@@ -68,12 +68,13 @@ int	exit_with_arg(t_mini *mini, int j, char **arg)
 		if (!ft_isnumeric(arg[0]))
 			exit_with_error(mini, arg);
 		ft_free_dp(arg);
+		g_global_exit = ft_atoi(mini->flag_arg);
 		exit (ft_atoi(mini->flag_arg));
 	}
 	return (0);
 }
 
-void	ft_exit(t_mini *mini, int i)//freelemeleri yap
+void	ft_exit(t_mini *mini, int i)
 {
 	char	**arg;
 	int		j;
@@ -90,6 +91,9 @@ void	ft_exit(t_mini *mini, int i)//freelemeleri yap
 		if (mini->flag_arg && mini->flag_arg[0])
 			if (exit_with_arg(mini, j, arg) == 1)
 				return ;
+		ft_free_dp(mini->env);
+		ft_free_struct(mini);
 		exit(g_global_exit);
 	}
+	ft_free_dp(arg);
 }

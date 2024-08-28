@@ -123,4 +123,5 @@ void	read_and_exec(t_mini *mini, int i)
 	}
 	close_duplicate_fd(fd);
 	wait_child(mini);
+	ft_free_struct(mini);
 }

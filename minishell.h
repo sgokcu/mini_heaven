@@ -73,7 +73,6 @@ typedef struct s_mini
 void		take_env(t_mini *mini);
 char		**mm_split(char *temp, char c);
 void		placing(char **args, t_mini *mini);
-void		print_env(t_mini *mini, int status);
 void		quote_check(char temp, int *squotes, int *dquotes);
 void		allocate(t_mini *mini);
 void		allocate_continue(t_mini *mini);
@@ -102,7 +101,11 @@ void		free_env(char **envi);
 void		take_name_for_export(char *str, t_mini *mini);
 char		*export_business(char *str, t_mini *mini);
 int			does_env_have(char *str, t_mini *mini);
-void		print_env(t_mini *mini, int status);
+void		ft_env(t_mini *mini, int status);
+void		ft_unset(t_mini *mini);
+void		ft_start_exp(t_mini *mini);
+int			count_unsets(char **str, t_mini *mini);
+void		cmp_env(char **str, char **envi, t_mini *mini, int count);
 
 
 
@@ -184,6 +187,7 @@ void		echo_with_arg(t_mini *mini);
 void		echo_flag_control(char **arg, int *i);
 int			flag_control(char *arg);
 int			execute_error(char *command, int i);
+void	    ft_free_struct(t_mini *mini);
 
 
 
