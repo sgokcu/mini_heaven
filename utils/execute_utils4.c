@@ -6,7 +6,7 @@ void    ft_free_struct(t_mini *mini)
     {
         if (mini->cmd)
             free(mini->cmd);
-        if (mini->flag_arg)
+        if (mini->flag_arg && mini->flag_arg[0])
             free(mini->flag_arg);
         if (mini->input)
             ft_free_dp(mini->input);

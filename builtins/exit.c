@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:40 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/20 18:15:41 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/08/28 17:47:35 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	exit_with_error(t_mini *mini, char **arg)
 	ft_putstr_fd(": numeric argument required\n", 2);
 	g_global_exit = 255;
 	ft_free_dp(arg);
+	ft_free_struct(mini);
+	ft_free_dp(mini->env);
 	exit (255);
 }
 
@@ -68,6 +70,8 @@ int	exit_with_arg(t_mini *mini, int j, char **arg)
 		if (!ft_isnumeric(arg[0]))
 			exit_with_error(mini, arg);
 		ft_free_dp(arg);
+		ft_free_struct(mini);
+		ft_free_dp(mini->env);
 		g_global_exit = ft_atoi(mini->flag_arg);
 		exit (ft_atoi(mini->flag_arg));
 	}
