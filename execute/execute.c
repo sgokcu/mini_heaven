@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:10:04 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/26 18:43:43 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/03 16:49:31 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*get_cmd_path(t_mini *cmd, char **command, char **path, char *temp)
 		free(temp2);
 	}
 	printf("minishell: %s: command not found\n", command[0]);
+	g_global_exit = 127;
 	exit(127);
 	return (NULL);
 }

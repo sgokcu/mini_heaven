@@ -385,7 +385,7 @@ int pipe_check(char *str)
 		else
 		{
 			g_global_exit = 258;
-			printf("minishell: syntax error near unexpected token `|'\n");
+			printf("minishell: syntax error near unexpected token `|'\n");//düzelt.
 			return (0);
 		}
 	}
@@ -394,6 +394,15 @@ int pipe_check(char *str)
 
 void take_cmd(char *str, t_mini *mini)
 {
+	char	*temp;
+
+	temp = ft_strtrim(str, " \t");
+	if (!temp[0])
+	{
+		mini->cmd = NULL;
+		free (temp);
+		return ;
+	}
 	mini->redirect->start = 0;
 	take_name(str , mini);
 	mini->cmd = delete_quotes(ft_substr(str, mini->redirect->start, mini->redirect->len), mini);

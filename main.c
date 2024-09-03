@@ -42,6 +42,7 @@ int	main()
 		}
 		args = mm_split(temp3, '|');
 		placing(args, &mini);
+		printf("a\n");
 		read_and_exec(&mini, command_list_count(&mini));
 	}
 }
