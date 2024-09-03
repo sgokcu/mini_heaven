@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:18:11 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/23 15:48:07 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/03 16:24:28 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,7 @@ void	read_and_exec(t_mini *mini, int i)
 
 	temp = mini;
 	duplicate_default_fd(fd);
-	if (check_same(mini->cmd, "echo"))
-		g_global_exit = 0;
+	g_global_exit = 0;
 	while (temp)
 	{
 		command = execve_command(temp, NULL);
