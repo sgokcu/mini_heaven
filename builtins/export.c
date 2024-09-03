@@ -1,4 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
+/*   Updated: 2024/09/03 19:41:30 by sgokcu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
+
+//cmd sht 7 //
 
 int does_env_have(char *str, t_mini *mini)
 {
@@ -90,67 +104,85 @@ int env_count_full(t_mini *mini)
 		i++;
 	return (i);
 }
+
+int exp_control(char **keep, int *i)
+{
+	if (keep[0][0] == '-')
+	{
+		printf("export: invalid option\n");
+		return (0);
+	}
+	if (((keep[(*i)][0] >= '0' && keep[(*i)][0] <= '9') || keep[(*i)][0] == '='))
+	{
+		printf("export: '%s': not a valid identifier\n", keep[(*i)]);
+		(*i)++;
+		return (1);
+	}
+	if (!ft_strchr(keep[(*i)], '='))
+	{
+		(*i)++;
+		return (1);
+	}
+	return (-1);
+}
+	
+void exp_contains_equal(char **keep, int *i, int j, int *control)
+{
+	while (keep[(*i)][j] != '=')
+	{
+		if(!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '_' && keep[(*i)][j] != 34 && keep[(*i)][j] != 39)
+		{
+			printf("export: '%s': not a valid identifier\n", keep[(*i)]);
+			(*i)++;
+			(*control) = 1;
+			break ;
+		}
+		j++;
+	}
+}
+
+void exp_putting(t_mini *mini, char **keep, int *i)
+{
+	char *hold;
+
+	hold =  export_business(keep[(*i)], mini);
+	if(does_env_have(hold, mini))
+	{
+		free(mini->env[does_env_have(hold, mini)]);
+		mini->env[does_env_have(hold, mini)] = delete_quotes(ft_strdup(keep[(*i)]), mini);
+	}
+	else
+	{
+		put_env(delete_quotes(ft_strdup(keep[(*i)]), mini), mini);
+	}
+	(*i)++;
+}
+
 void	ft_start_exp(t_mini *mini)
 {
 	char **keep;
 	int i;
-	int j;
+	int d;
 	int control;
-	char *hold;
 
 	i = 0;
-	j = 0;
 	control = 0;
 	keep = mm_split(mini->flag_arg, ' ');
 	while(keep[i])
 	{
-		if (keep[0][0] == '-')
-		{
-			printf("export: invalid option\n");
+		d = exp_control(keep, &i);
+		if(d == 0)
 			return ;
-		}
-		if (((keep[i][0] >= '0' && keep[i][0] <= '9') || keep[i][0] == '='))
-		{
-			printf("export: '%s': not a valid identifier\n", keep[i]);
-			i++;
+		else if(d == 1)
 			continue ;
-		}
-		if (!ft_strchr(keep[i], '='))
-		{
-			i++;
-			continue ;
-		}
-		while (keep[i][j] != '=')
-		{
-			if(!(ft_isalnum(keep[i][j])) && keep[i][j] != '_')
-			{
-				printf("export: '%s': not a valid identifier\n", keep[i]);
-				i++;
-				control = 1;
-				break ;
-			}
-			j++;
-		}
-		j = 0;
-		if(control == 1)
+		exp_contains_equal(keep, &i, 0, &control);
+		if (control == 1)
 		{
 			control = 0;
 			continue;
 		}
 		else
-		{
-			hold =  export_business(keep[i], mini);
-			if(does_env_have(hold, mini))
-			{
-				free(mini->env[does_env_have(hold, mini)]);
-				mini->env[does_env_have(hold, mini)] = delete_quotes(ft_strdup(keep[i]), mini);
-			}
-			else
-			{
-				put_env(delete_quotes(ft_strdup(keep[i]), mini), mini);
-			}
-			i++;
-		}
+			exp_putting(mini, keep, &i);
 	}
 }
 

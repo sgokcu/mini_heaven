@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/03 18:23:54 by sgokcu            #+#    #+#             */
+/*   Updated: 2024/09/03 19:03:19 by sgokcu           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	g_global_exit;
@@ -42,7 +54,6 @@ int	main()
 		}
 		args = mm_split(temp3, '|');
 		placing(args, &mini);
-		printf("a\n");
 		read_and_exec(&mini, command_list_count(&mini));
 	}
 }
