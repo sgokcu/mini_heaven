@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/03 19:41:30 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/04 19:43:07 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 //cmd sht 7 //
 
-int does_env_have(char *str, t_mini *mini)
+int	does_env_have(char *str, t_mini *mini)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (mini->env[i])
 	{
-		if(!ft_strncmp(str, mini->env[i], ft_strlen(str)))
+		if (!ft_strncmp(str, mini->env[i], ft_strlen(str)))
 			return (i);
 		i++;
 	}
 	return (0);
 }
 
-void take_name_for_export(char *str, t_mini *mini)
+void	take_name_for_export(char *str, t_mini *mini)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ void take_name_for_export(char *str, t_mini *mini)
 	mini->redirect->len = 0;
 	while (str[i])
 	{
-	if(str[i] == '=')
+		if (str[i] == '=')
 		{
 			mini->redirect->len += 1;
 			break ;
@@ -48,31 +48,11 @@ void take_name_for_export(char *str, t_mini *mini)
 	free(str);
 }
 
-char *export_business(char *str, t_mini *mini)
-{
-	char *hold;
 
-	take_name_for_export(delete_quotes(ft_strdup(str), mini), mini);
-	hold = ft_substr(delete_quotes(ft_strdup(str), mini), mini->redirect->start, mini->redirect->len);
-	return (hold);
-}
 
-void	env_recent(char **envi, t_mini *mini)
-{
-	int	i;
 
-	mini->env = malloc(sizeof(char *) * (count_environ(mini->env) + 2));
-	i = 0;
-	while (envi[i]) 
-	{
-		mini->env[i] = ft_strdup(envi[i]);
-		i++;
-	}
-	mini->env[i] = NULL;
-	free_env(envi);
-}
 
-void free_env(char **envi)
+void	free_env(char **envi)
 {
 	int i;
 
@@ -85,7 +65,7 @@ void free_env(char **envi)
 	}
 	free(envi);
 }
-void put_env(char *str, t_mini *mini)
+void	put_env(char *str, t_mini *mini)
 {
 	int d;
 
@@ -95,7 +75,7 @@ void put_env(char *str, t_mini *mini)
 	mini->env[d + 1] = NULL;
 }
 
-int env_count_full(t_mini *mini)
+int	env_count_full(t_mini *mini)
 {
 	int	i;
 
@@ -105,7 +85,7 @@ int env_count_full(t_mini *mini)
 	return (i);
 }
 
-int exp_control(char **keep, int *i)
+int	exp_control(char **keep, int *i)
 {
 	if (keep[0][0] == '-')
 	{
@@ -125,12 +105,13 @@ int exp_control(char **keep, int *i)
 	}
 	return (-1);
 }
-	
-void exp_contains_equal(char **keep, int *i, int j, int *control)
+
+void	exp_contains_equal(char **keep, int *i, int j, int *control)
 {
 	while (keep[(*i)][j] != '=')
 	{
-		if(!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '_' && keep[(*i)][j] != 34 && keep[(*i)][j] != 39)
+		if (!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '_' \
+		&& keep[(*i)][j] != 34 && keep[(*i)][j] != 39)
 		{
 			printf("export: '%s': not a valid identifier\n", keep[(*i)]);
 			(*i)++;
@@ -141,19 +122,19 @@ void exp_contains_equal(char **keep, int *i, int j, int *control)
 	}
 }
 
-void exp_putting(t_mini *mini, char **keep, int *i)
+void	exp_putting(t_mini *mini, char **keep, int *i)
 {
 	char *hold;
 
 	hold =  export_business(keep[(*i)], mini);
-	if(does_env_have(hold, mini))
+	if (does_env_have(hold, mini))
 	{
 		free(mini->env[does_env_have(hold, mini)]);
-		mini->env[does_env_have(hold, mini)] = delete_quotes(ft_strdup(keep[(*i)]), mini);
+		mini->env[does_env_have(hold, mini)] = delete_quotes(ft_strdup(keep[(*i)]), mini, 0, 0);
 	}
 	else
 	{
-		put_env(delete_quotes(ft_strdup(keep[(*i)]), mini), mini);
+		put_env(delete_quotes(ft_strdup(keep[(*i)]), mini, 0, 0), mini);
 	}
 	(*i)++;
 }
@@ -168,7 +149,7 @@ void	ft_start_exp(t_mini *mini)
 	i = 0;
 	control = 0;
 	keep = mm_split(mini->flag_arg, ' ');
-	while(keep[i])
+	while (keep[i])
 	{
 		d = exp_control(keep, &i);
 		if(d == 0)

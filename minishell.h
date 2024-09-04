@@ -77,26 +77,24 @@ void		quote_check(char temp, int *squotes, int *dquotes);
 void		allocate(t_mini *mini);
 void		allocate_continue(t_mini *mini);
 void		fill_space(char *str, int start, int len);
-char		*delete_quotes(char *str, t_mini *mini);
+char		*delete_quotes(char *str, t_mini *mini, int i, int j);
 char		**ft_split(char const *s, char c);
 void		imp2(t_mini *mini, int *i, char *str, int n);
 void		imp(t_mini *mini, int *i, char *str, int n);
 int			is_quotes_closed(char *str);
-int			is_valid_name(char *str, t_mini *mini);
+int			is_valid_name(char *str, t_mini *mini, int sq, int dq);
 int			pipe_check(char *str);
 char		*is_dollar_exist_and_valid(char *str, t_mini *mini);
 void		take_name(char *args, t_mini *mini);
-char		*delete_quotes(char *str, t_mini *mini);
 char		*dollar_business(char *str, t_mini *mini, int *i);
 void		take_name_for_dollar(char *str, t_mini *mini);
 void		struct_business(t_mini *mini);
 char		*env_contains(char *str, t_mini *mini);
-char		*val_redirect(char *str, t_mini *mini);
+char		*val_redirect(char *str, t_mini *mini, int i, int j);
 void		ft_export(t_mini *mini);
 int			count_environ(char **environ);
 void		put_env(char *str, t_mini *mini);
 int			env_count_full(t_mini *mini);
-void		print_env(t_mini *mini, int status);
 void		free_env(char **envi);
 void		take_name_for_export(char *str, t_mini *mini);
 char		*export_business(char *str, t_mini *mini);
@@ -104,8 +102,9 @@ int			does_env_have(char *str, t_mini *mini);
 void		ft_env(t_mini *mini, int status);
 void		ft_unset(t_mini *mini);
 void		ft_start_exp(t_mini *mini);
-int			count_unsets(char **str, t_mini *mini);
+int			count_unsets(char **str, t_mini *mini, int i);
 void		cmp_env(char **str, char **envi, t_mini *mini, int count);
+void		dollar_working(t_mini *mini, char **str, int *i);
 
 
 
@@ -120,7 +119,7 @@ void		status_regulator_pipe(t_mini * mini);
 void		append_status_regulator(t_mini *mini, int type);
 void		heredoc_status_regulator(t_mini *mini, int type);
 void		run_cmd(t_mini *mini, char **command);
-char		*get_cmd_path(t_mini *mini, char **command, char **path, char *temp);
+char		*get_cmd_path(t_mini *mini, char **command, char **path, int i);
 void		heredoc_status_regulator(t_mini *mini, int type);
 void		append_status_regulator(t_mini *mini, int type);
 void		ft_executer(t_mini *mini, char **command, int i, int fd[2]);
@@ -187,7 +186,7 @@ void		echo_with_arg(t_mini *mini);
 void		echo_flag_control(char **arg, int *i);
 int			flag_control(char *arg);
 int			execute_error(char *command, int i);
-void	    ft_free_struct(t_mini *mini);
+void		ft_free_struct(t_mini *mini);
 
 
 

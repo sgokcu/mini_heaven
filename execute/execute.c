@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:10:04 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/03 16:49:31 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/04 18:30:01 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ char	**get_path(t_mini *cmd)
 	return (NULL);
 }
 
-char	*get_cmd_path(t_mini *cmd, char **command, char **path, char *temp)
+char	*get_cmd_path(t_mini *cmd, char **command, char **path, int i)
 {
+	char	*temp;
 	char	*temp2;
-	int		i;
 
-	i = -1;
 	path = get_path(cmd);
 	if (!path)
 	{
@@ -81,6 +80,6 @@ void	run_cmd(t_mini *mini, char **command)
 				return ;
 	}
 	else
-		path = get_cmd_path(mini, command, NULL, NULL);
+		path = get_cmd_path(mini, command, NULL, -1);
 	execve(path, command, mini->env);
 }

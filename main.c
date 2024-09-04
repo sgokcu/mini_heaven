@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:54 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/03 19:03:19 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/04 19:28:13 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	main()
 		if (!is_quotes_closed(temp2))
 			continue ;
 		ft_signal_regulator(MAIN_P2);
-		if (!pipe_check(temp2))
+		if (!is_valid_name(temp2, &mini, 0, 0))
 			continue ;
-		if (!is_valid_name(temp2, &mini))
+		if (!pipe_check(temp2))
 			continue ;
 		temp3 = is_dollar_exist_and_valid(temp2, &mini);
 		if (!temp3 || !temp3[0])

@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:12 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/03 20:00:57 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/04 14:01:45 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,32 @@ void unset_typo(char **keep, int *i, int j, int *control)
 	}
 }
 
-
-
-void ft_start_unset(t_mini *mini)
+int export_unset_control(int *control)
 {
-	int i;
-	int k;
-	int d;
-	char **keep;
-	char **valid;
-	int control;
+	if((*control) == 1)
+	{
+		(*control) = 0;
+		return (1);
+	}
+	else
+		return (0);
+}
+
+void to_make_it_shorter(t_mini *mini, char **valid, int *k)
+{
+	valid[(*k)] = NULL;
+	(*k) = 0;
+	cmp_env(valid, mini->env, mini, count_unsets(valid, mini, 0));
+}
+
+void while_start_unset(char **keep, char **valid, int *k)
+{
 	int s;
+	int i;
+	int control;
 
 	i = 0;
-	k = 0;
 	control = 0;
-	keep = mm_split(mini->flag_arg, ' ');
-	valid = NULL;
-	valid = malloc(sizeof(char *) * (count_environ(keep)) + 1);
 	while(keep[i])
 	{
 		s = unset_check(keep, &i);
@@ -69,34 +77,42 @@ void ft_start_unset(t_mini *mini)
 		else if(s == 1)
 			continue ;
 		unset_typo(keep, &i, 0, &control);
-		if(control == 1)
-		{
-			control = 0;
+		if(export_unset_control(&control) == 1)
 			continue;
-		}
 		else
-			valid[k++] = ft_strjoin(keep[i++], "=");
+			valid[(*k)++] = ft_strjoin(keep[i++], "=");
 	}
-	valid[k] = NULL;
-	k = 0;
-	cmp_env(valid, mini->env, mini, count_unsets(valid, mini));
 }
 
-int count_unsets(char **str, t_mini *mini)
+void ft_start_unset(t_mini *mini)
 {
 	int i;
+	int k;
+	char **keep;
+	char **valid;
+
+	i = 0;
+	k = 0;
+	keep = mm_split(mini->flag_arg, ' ');
+	valid = NULL;
+	valid = malloc(sizeof(char *) * (count_environ(keep)) + 1);
+	while_start_unset(keep, valid, &k);
+	to_make_it_shorter(mini, valid, &k);
+}
+
+int count_unsets(char **str, t_mini *mini, int i)
+{
 	int j;
 	int count;
 
-	i = 0;
 	j = 0;
 	count = 0;
-	j = 0;
 	while(mini->env[i])
 	{
 		while(str[j])
 		{
-			if(mini->env[i] && !ft_strncmp(mini->env[i], str[j], ft_strlen(str[j])))
+			if(mini->env[i]
+				&& !ft_strncmp(mini->env[i], str[j], ft_strlen(str[j])))
 			{
 				count++;
 				i++;
@@ -112,31 +128,40 @@ int count_unsets(char **str, t_mini *mini)
 	return (count);
 }
 
-void cmp_env(char **str, char **envi, t_mini *mini, int count)
+void find_match(char **str, char **envi, int *control, int *i)
+{
+	int j;
+
+	j = 0;
+	while(str[j])
+	{
+		if(!ft_strncmp(envi[(*i)], str[j], ft_strlen(str[j])))
+		{
+			(*i)++;
+			j = 0;
+			(*control) = 1;
+			break ;
+		}
+		j++;
+	}
+}
+
+void cmp_env(char **str, char **envi, t_mini *mini, int cnt)
 {
 	int i;
-	int j;
 	int e;
+	int j;
 	int control;
 
-	mini->env = malloc(sizeof(char *) * (count_environ(mini->env) - count + 1));
+	if(!cnt)
+		return ;
+	mini->env = malloc(sizeof(char *) * (count_environ(mini->env) - cnt + 1));
 	i = 0;
-	j = 0;
 	e = 0;
 	control = 0;
 	while(envi[i])
 	{
-		while(str[j])
-		{
-			if(!ft_strncmp(envi[i], str[j], ft_strlen(str[j])))
-			{
-				i++;
-				j = 0;
-				control = 1;
-				break ;
-			}
-			j++;
-		}
+		find_match(str, envi, &control, &i);
 		if(control == 0)
 		{
 			mini->env[e++] = ft_strdup(envi[i]);
