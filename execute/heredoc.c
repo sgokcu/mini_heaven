@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:52:47 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/03 16:25:38 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/04 23:58:12 by hosgor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_heredoc(int fd[2], t_mini *mini, int fd_2[2], int i)
 	exit (0);
 }
 
-void	heredoc_pipe(t_mini *mini, int fd[2])
+void	heredoc_pipe(t_mini *mini, int fd[2], char **command)
 {
 	int	fd_2[2];
 	int	status;
@@ -65,4 +65,6 @@ void	heredoc_pipe(t_mini *mini, int fd[2])
 	waitpid(mini->pid, &status, 0);
 	if (WIFEXITED(status))
 		g_global_exit = WEXITSTATUS(status);
+	if (g_global_exit == 130)
+		ft_free_dp(command);
 }

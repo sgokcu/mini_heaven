@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:54 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 19:28:13 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/04 23:48:48 by hosgor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,64 @@
 
 int	g_global_exit;
 
-int	main()
+void	ft_close(t_mini *mini)
 {
-	char	**args;
-	char	*temp;
-	char	*temp2;
-	char	*temp3;
-	t_mini	mini;
+	ft_free_dp(mini->env);
+	printf("exit\n");
+	exit(0);
+}
 
-	mini.env = 0;
-	g_global_exit = 0;
-	take_env(&mini);
+int	ft_split_arg(t_mini *mini, char *temp, char *temp2, char **temp3)
+{
+	ft_signal_regulator(MAIN_P);
+	temp = readline("minishell> ");
+	if (!temp)
+		ft_close(mini);
+	add_history(temp);
+	temp2 = ft_strtrim(temp, " \t");
+	free(temp);
+	if (!temp2[0])
+	{
+		free(temp2);
+		return (0);
+	}
+	ft_signal_regulator(MAIN_P2);
+	if (!is_quotes_closed(temp2) || \
+	!is_valid_name(temp2, mini, 0, 0) || !pipe_check(temp2))
+		return (0);
+	*temp3 = is_dollar_exist_and_valid(temp2, mini);
+	if (!*temp3[0])
+	{
+		free(*temp3);
+		return (0);
+	}
+	return (1);
+}
+
+void	ft_start(t_mini *mini, char **args, char *temp3)
+{
 	while (1)
 	{
-		ft_signal_regulator(MAIN_P);
-		temp = readline("minishell> ");
-		if (!temp)
-		{
-			printf("exit\n");
-			exit(0);
-		}
-		add_history(temp);
-		temp2 = ft_strtrim(temp, " \t");
-		free(temp);
-		if (!temp2[0])
+		if (!ft_split_arg(mini, NULL, NULL, &temp3))
 			continue;
-		if (!is_quotes_closed(temp2))
-			continue ;
-		ft_signal_regulator(MAIN_P2);
-		if (!is_valid_name(temp2, &mini, 0, 0))
-			continue ;
-		if (!pipe_check(temp2))
-			continue ;
-		temp3 = is_dollar_exist_and_valid(temp2, &mini);
-		if (!temp3 || !temp3[0])
-		{
-			free (temp3);
-			continue;
-		}
 		args = mm_split(temp3, '|');
-		placing(args, &mini);
-		read_and_exec(&mini, command_list_count(&mini));
+		placing(args, mini);
+		read_and_exec(mini, command_list_count(mini));
 	}
+}
+
+int	main(int ac, char **av)
+{
+	t_mini	mini;
+
+	(void)av;
+	mini.env = NULL;
+	g_global_exit = 0;
+	if (ac != 1)
+	{
+		ft_putstr_fd("Error: Too Many Arguments!\n", 2);
+		return (0);
+	}
+	take_env(&mini);
+	ft_start(&mini, NULL, NULL);
 }

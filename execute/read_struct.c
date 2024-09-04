@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:18:11 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/03 16:24:28 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 00:02:57 by hosgor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,31 +77,32 @@ int	status_check(t_mini *temp)
 		return (3);
 }
 
-void	ft_executer(t_mini *mini, char **command, int i, int fd[2])
+int	ft_executer(t_mini *mini, char **command, int i, int fd[2])
 {
 	if (status_check(mini) == 1)
 	{
-		if (g_global_exit == 130)
-			return ;
 		if (mini->heredoc && mini->heredoc[0])
-			heredoc_pipe(mini, fd);
+			heredoc_pipe(mini, fd, command);
+		if (g_global_exit == 130)
+			return (0);
 		execute_pipe(mini, command, i);
 	}
 	else if (status_check(mini) == 2)
 	{
+		heredoc_pipe(mini, fd, command);
 		if (g_global_exit == 130)
-			return ;
-		heredoc_pipe(mini, fd);
+			return (0);
 		execute_pipe(mini, command, i);
 	}
 	else
 	{
-		if (g_global_exit == 130)
-			return ;
 		if (mini->heredoc && mini->heredoc[0])
-			heredoc_pipe(mini, fd);
+			heredoc_pipe(mini, fd, command);
+		if (g_global_exit == 130)
+			return (0);
 		child_procces(mini, command, i);
 	}
+	return (1);
 }
 
 void	read_and_exec(t_mini *mini, int i)
@@ -116,11 +117,12 @@ void	read_and_exec(t_mini *mini, int i)
 	while (temp)
 	{
 		command = execve_command(temp, NULL);
-		ft_executer(temp, command, i, fd);
+		if (!ft_executer(temp, command, i, fd))
+			break ;
 		ft_free_dp(command);
 		temp = temp->next;
 	}
 	close_duplicate_fd(fd);
-	wait_child(mini);
+	wait_and_status(mini, i);
 	ft_free_struct(mini);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:43:56 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/23 15:47:59 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/05 00:02:43 by hosgor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,41 @@ void	child_procces(t_mini *mini, char **command, int i)
 	return ;
 }
 
-void	wait_child(t_mini *mini)
+void	handler_sigint(int sig)
 {
+	if (sig == SIGINT)
+	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
+}
+
+void	wait_and_status(t_mini *mini, int i)
+{
+	pid_t	j;
+	int		status;
 	t_mini	*temp;
 
+	status = 0;
 	temp = mini;
+	if (g_global_exit == 130)
+	{
+		g_global_exit = 1;
+		return ;
+	}
 	while (temp)
 	{
-		waitpid(temp->pid, 0, 0);
+		signal(SIGINT, &handler_sigint);
+		j = waitpid(temp->pid, &status, 0);
+		if (j < 0)
+			continue ;
+		if (i == 1 && temp->status == BUILTIN)
+			break ;
+		if (WIFEXITED(status))
+			g_global_exit = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			g_global_exit = 128 + WTERMSIG(status);
 		temp = temp->next;
 	}
 }
