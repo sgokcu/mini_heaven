@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:41:59 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 19:43:22 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/04 20:11:43 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*export_business(char *str, t_mini *mini)
 		mini->redirect->start, mini->redirect->len);
 	return (hold);
 }
+
 void	env_recent(char **envi, t_mini *mini)
 {
 	int	i;
@@ -34,4 +35,38 @@ void	env_recent(char **envi, t_mini *mini)
 	}
 	mini->env[i] = NULL;
 	free_env(envi);
+}
+
+void	free_env(char **envi)
+{
+	int i;
+
+	i = 0;
+	while(envi[i])
+	{
+		free(envi[i]);
+		envi[i] = NULL;
+		i++;
+	}
+	free(envi);
+}
+
+void	put_env(char *str, t_mini *mini)
+{
+	int d;
+
+	env_recent(mini->env, mini);
+	d = env_count_full(mini);
+	mini->env[d] = ft_strdup(str);
+	mini->env[d + 1] = NULL;
+}
+
+int	env_count_full(t_mini *mini)
+{
+	int	i;
+
+	i = 0;
+	while (mini->env[i] && mini->env[i][0])
+		i++;
+	return (i);
 }

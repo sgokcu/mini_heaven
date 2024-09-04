@@ -6,84 +6,11 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 19:43:07 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/04 19:47:21 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-//cmd sht 7 //
-
-int	does_env_have(char *str, t_mini *mini)
-{
-	int	i;
-
-	i = 0;
-	while (mini->env[i])
-	{
-		if (!ft_strncmp(str, mini->env[i], ft_strlen(str)))
-			return (i);
-		i++;
-	}
-	return (0);
-}
-
-void	take_name_for_export(char *str, t_mini *mini)
-{
-	int	i;
-
-	i = 0;
-	mini->redirect->start += i;
-	mini->redirect->len = 0;
-	while (str[i])
-	{
-		if (str[i] == '=')
-		{
-			mini->redirect->len += 1;
-			break ;
-		}
-		i++;
-		mini->redirect->len += 1;
-	}
-	free(str);
-}
-
-
-
-
-
-void	free_env(char **envi)
-{
-	int i;
-
-	i = 0;
-	while(envi[i])
-	{
-		free(envi[i]);
-		envi[i] = NULL;
-		i++;
-	}
-	free(envi);
-}
-void	put_env(char *str, t_mini *mini)
-{
-	int d;
-
-	env_recent(mini->env, mini);
-	d = env_count_full(mini);
-	mini->env[d] = ft_strdup(str);
-	mini->env[d + 1] = NULL;
-}
-
-int	env_count_full(t_mini *mini)
-{
-	int	i;
-
-	i = 0;
-	while (mini->env[i] && mini->env[i][0])
-		i++;
-	return (i);
-}
 
 int	exp_control(char **keep, int *i)
 {
