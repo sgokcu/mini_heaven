@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 19:47:21 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 15:08:40 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	exp_control(char **keep, int *i)
 		printf("export: invalid option\n");
 		return (0);
 	}
-	if (((keep[(*i)][0] >= '0' && keep[(*i)][0] <= '9') || keep[(*i)][0] == '='))
+	if (((keep[(*i)][0] >= '0' && keep[(*i)][0] <= '9') \
+	|| keep[(*i)][0] == '='))
 	{
 		printf("export: '%s': not a valid identifier\n", keep[(*i)]);
 		(*i)++;
@@ -51,13 +52,14 @@ void	exp_contains_equal(char **keep, int *i, int j, int *control)
 
 void	exp_putting(t_mini *mini, char **keep, int *i)
 {
-	char *hold;
+	char	*hold;
 
-	hold =  export_business(keep[(*i)], mini);
+	hold = export_business(keep[(*i)], mini);
 	if (does_env_have(hold, mini))
 	{
 		free(mini->env[does_env_have(hold, mini)]);
-		mini->env[does_env_have(hold, mini)] = delete_quotes(ft_strdup(keep[(*i)]), mini, 0, 0);
+		mini->env[does_env_have(hold, mini)] = \
+		delete_quotes(ft_strdup(keep[(*i)]), mini, 0, 0);
 	}
 	else
 	{
@@ -68,10 +70,10 @@ void	exp_putting(t_mini *mini, char **keep, int *i)
 
 void	ft_start_exp(t_mini *mini)
 {
-	char **keep;
-	int i;
-	int d;
-	int control;
+	char	**keep;
+	int		i;
+	int		d;
+	int		control;
 
 	i = 0;
 	control = 0;
@@ -79,15 +81,15 @@ void	ft_start_exp(t_mini *mini)
 	while (keep[i])
 	{
 		d = exp_control(keep, &i);
-		if(d == 0)
+		if (d == 0)
 			return ;
-		else if(d == 1)
+		else if (d == 1)
 			continue ;
 		exp_contains_equal(keep, &i, 0, &control);
 		if (control == 1)
 		{
 			control = 0;
-			continue;
+			continue ;
 		}
 		else
 			exp_putting(mini, keep, &i);
@@ -103,4 +105,3 @@ void	ft_export(t_mini *mini)
 	else
 		ft_env(mini, 1);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:54 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 23:48:48 by hosgor           ###   ########.fr       */
+/*   Updated: 2024/09/05 15:14:17 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_start(t_mini *mini, char **args, char *temp3)
 	while (1)
 	{
 		if (!ft_split_arg(mini, NULL, NULL, &temp3))
-			continue;
+			continue ;
 		args = mm_split(temp3, '|');
 		placing(args, mini);
 		read_and_exec(mini, command_list_count(mini));

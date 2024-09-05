@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:12 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 19:51:49 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 15:11:05 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int unset_check(char **keep, int *i)
+int	unset_check(char **keep, int *i)
 {
-	if(keep[0][0] == '-')
+	if (keep[0][0] == '-')
 	{
 		printf("unset: invalid option\n");
 		return (0);
 	}
-	if((keep[(*i)][0] >= '0' && keep[(*i)][0] <= '9'))
+	if ((keep[(*i)][0] >= '0' && keep[(*i)][0] <= '9'))
 	{
 		printf("unset: '%s': not a valid identifier\n", keep[(*i)]);
 		(*i)++;
@@ -28,46 +28,46 @@ int unset_check(char **keep, int *i)
 	return (-1);
 }
 
-void while_start_unset(char **keep, char **valid, int *k)
+void	while_start_unset(char **keep, char **valid, int *k)
 {
-	int s;
-	int i;
-	int control;
+	int	s;
+	int	i;
+	int	control;
 
 	i = 0;
 	control = 0;
-	while(keep[i])
+	while (keep[i])
 	{
 		s = unset_check(keep, &i);
-		if(s == 0)
+		if (s == 0)
 			return ;
-		else if(s == 1)
+		else if (s == 1)
 			continue ;
 		unset_typo(keep, &i, 0, &control);
-		if(export_unset_control(&control) == 1)
-			continue;
+		if (export_unset_control(&control) == 1)
+			continue ;
 		else
 			valid[(*k)++] = ft_strjoin(keep[i++], "=");
 	}
 }
 
-void cmp_env(char **str, char **envi, t_mini *mini, int cnt)
+void	cmp_env(char **str, char **envi, t_mini *mini, int cnt)
 {
-	int i;
-	int e;
-	int j;
-	int control;
+	int	i;
+	int	e;
+	int	j;
+	int	control;
 
-	if(!cnt)
+	if (!cnt)
 		return ;
 	mini->env = malloc(sizeof(char *) * (count_environ(mini->env) - cnt + 1));
 	i = 0;
 	e = 0;
 	control = 0;
-	while(envi[i])
+	while (envi[i])
 	{
 		find_match(str, envi, &control, &i);
-		if(control == 0)
+		if (control == 0)
 		{
 			mini->env[e++] = ft_strdup(envi[i]);
 			i++;
@@ -80,12 +80,12 @@ void cmp_env(char **str, char **envi, t_mini *mini, int cnt)
 	free_env(envi);
 }
 
-void ft_start_unset(t_mini *mini)
+void	ft_start_unset(t_mini *mini)
 {
-	int i;
-	int k;
-	char **keep;
-	char **valid;
+	int		i;
+	int		k;
+	char	**keep;
+	char	**valid;
 
 	i = 0;
 	k = 0;

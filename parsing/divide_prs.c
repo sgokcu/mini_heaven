@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   divide_prs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:41 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/03 18:23:42 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 15:12:03 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	pp_counter(char *temp, int squotes, int dquotes, char c)
 	return (d);
 }
 
-void	sub(char *temp,char ***ret, char c)
+void	sub(char *temp, char ***ret, char c)
 {
 	int		i;
 	int		j;
