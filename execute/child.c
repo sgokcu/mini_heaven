@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:43:56 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/05 00:02:43 by hosgor           ###   ########.fr       */
+/*   Updated: 2024/09/05 16:55:49 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	wait_and_status(t_mini *mini, int i)
 
 	status = 0;
 	temp = mini;
-	if (g_global_exit == 130)
+	if (g_global_exit == 130 && status_check2(temp))
 	{
 		g_global_exit = 1;
 		return ;
@@ -77,11 +77,11 @@ void	wait_and_status(t_mini *mini, int i)
 	while (temp)
 	{
 		signal(SIGINT, &handler_sigint);
+		if (i == 1 && temp->status == BUILTIN)
+			break ;
 		j = waitpid(temp->pid, &status, 0);
 		if (j < 0)
 			continue ;
-		if (i == 1 && temp->status == BUILTIN)
-			break ;
 		if (WIFEXITED(status))
 			g_global_exit = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))

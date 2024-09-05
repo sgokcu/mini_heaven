@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/05 16:13:26 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/05 16:28:36 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ int			ft_open_append(t_mini *mini, int i);
 int			ft_open_input(t_mini *mini, int i);
 
 int			status_check(t_mini *temp);
+int			status_check2(t_mini *mini);
 void		heredoc_pipe(t_mini *mini, int fd[2], char **command);
 void		ft_heredoc(int fd[2], t_mini *mini, int fd_2[2], int i);
 int			check_same(char *s1, char *s2);

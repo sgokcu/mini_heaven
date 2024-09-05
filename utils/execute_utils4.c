@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:31:48 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 18:31:49 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 16:28:19 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,18 @@ void	ft_free_struct(t_mini *mini)
 		struct_business(mini);
 		mini = mini->next;
 	}
+}
+
+int	status_check2(t_mini *mini)
+{
+	t_mini	*temp;
+	
+	temp = mini;
+	while (temp)
+	{
+		if (status_check(temp) == 2)
+			return (1);
+		temp = temp->next;
+	}
+	return (0);
 }

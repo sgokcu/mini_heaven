@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:54 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 15:14:17 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/05 17:15:24 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_start(t_mini *mini, char **args, char *temp3)
 		args = mm_split(temp3, '|');
 		placing(args, mini);
 		read_and_exec(mini, command_list_count(mini));
+		ft_free_dp(args);
 	}
 }
 

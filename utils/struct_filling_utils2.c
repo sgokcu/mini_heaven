@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_filling_utils2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:06:31 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 20:16:38 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 17:00:14 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int is_valid_name(char *str, t_mini *mini, int sq, int dq)
 	char *tmp;
 
 	i = 0;
-	while (str[i] && (quote_check(str[i], &sq, &dq), 1))
+	while (str[i] && (quote_check(str[i], &sq, &dq), 1)) // iflerde str[i + 1] var mı diye bakılacak
 	{
 		if ((str[i] == '<' && str[i + 1] != '<'
 			&& (dq % 2 == 0) && (sq % 2 == 0))
-			|| (str[i] == '>' && str[i + 1] != '>'
+			|| (str[i + 1] && str[i] == '>' && str[i + 1] != '>'
 			&& (dq % 2 == 0) && (sq % 2 == 0)))
 			{
 				if(!to_do_newline1(mini, &i, str, &tmp))

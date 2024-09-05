@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_filling_utils1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:04:47 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 20:15:47 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 17:10:21 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,5 @@ void take_cmd(char *str, t_mini *mini)
 	take_name(str , mini);
 	mini->cmd = delete_quotes(ft_substr(str, mini->redirect->start, mini->redirect->len), mini, 0, 0);
 	fill_space(str, mini->redirect->start, mini->redirect->len);
+	free(temp);
 }
