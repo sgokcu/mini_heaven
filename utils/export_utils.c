@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:41:59 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 20:11:43 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 16:19:43 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*export_business(char *str, t_mini *mini)
 	char	*hold;
 
 	take_name_for_export(delete_quotes(ft_strdup(str), mini, 0, 0), mini);
-	hold = ft_substr(delete_quotes(ft_strdup(str), mini, 0, 0),
-		mini->redirect->start, mini->redirect->len);
+	hold = ft_substr(delete_quotes(ft_strdup(str), mini, 0, 0), \
+	mini->redirect->start, mini->redirect->len);
 	return (hold);
 }
 
@@ -28,7 +28,7 @@ void	env_recent(char **envi, t_mini *mini)
 
 	mini->env = malloc(sizeof(char *) * (count_environ(mini->env) + 2));
 	i = 0;
-	while (envi[i]) 
+	while (envi[i])
 	{
 		mini->env[i] = ft_strdup(envi[i]);
 		i++;
@@ -39,10 +39,10 @@ void	env_recent(char **envi, t_mini *mini)
 
 void	free_env(char **envi)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(envi[i])
+	while (envi[i])
 	{
 		free(envi[i]);
 		envi[i] = NULL;
@@ -53,7 +53,7 @@ void	free_env(char **envi)
 
 void	put_env(char *str, t_mini *mini)
 {
-	int d;
+	int	d;
 
 	env_recent(mini->env, mini);
 	d = env_count_full(mini);

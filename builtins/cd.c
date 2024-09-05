@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:30 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/22 19:02:48 by hosgor           ###   ########.fr       */
+/*   Updated: 2024/09/05 16:14:06 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	cd_case1(t_mini *mini, char **newlocation, char **newpwd, char *oldpwd)
+static int	cd_case1(t_mini *mini, char **newloc, char **newpwd, char *oldpwd)
 {
 	*newpwd = get_oldpwd(mini);
 	if (!*newpwd)
@@ -20,11 +20,11 @@ int	cd_case1(t_mini *mini, char **newlocation, char **newpwd, char *oldpwd)
 		free (oldpwd);
 		return (1);
 	}
-	*newlocation = *newpwd;
+	*newloc = *newpwd;
 	return (0);
 }
 
-int	cd_case2(t_mini *mini, char **newpwd, char **newlocation, char *oldpwd)
+static int	cd_case2(t_mini *mini, char **newpwd, char **newloc, char *oldpwd)
 {
 	*newpwd = get_home(mini);
 	if (!*newpwd)
@@ -32,11 +32,11 @@ int	cd_case2(t_mini *mini, char **newpwd, char **newlocation, char *oldpwd)
 		free(oldpwd);
 		return (1);
 	}
-	*newlocation = *newpwd;
+	*newloc = *newpwd;
 	return (0);
 }
 
-int	chdir_situation(char *newpwd, char *newlocation, char *oldpwd)
+static int	chdir_situation(char *newpwd, char *newlocation, char *oldpwd)
 {
 	if (!ft_isdirectory(newpwd))
 	{

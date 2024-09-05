@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:46:32 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 20:12:23 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 16:20:10 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	does_env_have(char *str, t_mini *mini)
 	return (0);
 }
 
-int export_unset_control(int *control)
+int	export_unset_control(int *control)
 {
-	if((*control) == 1)
+	if ((*control) == 1)
 	{
 		(*control) = 0;
 		return (1);

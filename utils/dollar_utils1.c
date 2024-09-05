@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:57:52 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 20:38:24 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/05 16:18:07 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void dollar_zero_question_free(char **str, char *hold, char *s1, char *s2)
+void	dollar_zero_question_free(char **str, char *hold, char *s1, char *s2)
 {
-	char *line;
+	char	*line;
 
 	line = ft_strjoin(hold, s2);
 	free(hold);
@@ -24,16 +24,16 @@ void dollar_zero_question_free(char **str, char *hold, char *s1, char *s2)
 	free(s2);
 }
 
-void dollar_zero_question(char	**str, int *i)
+void	dollar_zero_question(char	**str, int *i)
 {
-	char *hold;
-	char *val;
-	char *s1;
-	char *s2;
+	char	*hold;
+	char	*val;
+	char	*s1;
+	char	*s2;
 
 	s1 = ft_substr(*str, 0, (*i));
 	s2 = ft_substr(*str, (*i) + 2, ft_strlen((*str) + (*i) + 2));
-	if((*str)[(*i) + 1] == '0')
+	if ((*str)[(*i) + 1] == '0')
 		hold = ft_strjoin(s1, "./minishell");
 	else
 	{
@@ -44,5 +44,3 @@ void dollar_zero_question(char	**str, int *i)
 	dollar_zero_question_free(str, hold, s1, s2);
 	(*i) = 0;
 }
-
-

@@ -1,5 +1,17 @@
-#ifndef MINI_H
-# define MINI_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
+/*   Updated: 2024/09/05 16:13:26 by fhosgor          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include <stdio.h>
 # include <signal.h>
@@ -91,7 +103,8 @@ void		dollar_working(t_mini *mini, char **str, int *i);
 void		put_quotes(char *val, int *j, char *str, int *i);
 void		count_redirect(char *str, t_mini *mini, int *redirect, int *i);
 char		*env_contains(char *str, t_mini *mini);
-void		dollar_zero_question_free(char **str, char *hold, char *s1, char *s2);
+void		dollar_zero_question_free(char **str, char *hold, \
+				char *s1, char *s2);
 void		dollar_zero_question(char	**str, int *i);
 void		env_recent(char **envi, t_mini *mini);
 void		free_env(char **envi);
@@ -119,16 +132,10 @@ void		unset_typo(char **keep, int *i, int j, int *control);
 int			count_unsets(char **str, t_mini *mini, int i);
 void		find_match(char **str, char **envi, int *control, int *i);
 void		to_make_it_shorter(t_mini *mini, char **valid, int *k);
-
-
-
-
-
-
 //benim eklediklerim
 void		take_flag_arg(t_mini *mini, char *str);
 void		status_regulator(t_mini *mini, int i, int sq, int dq);
-void		status_regulator_pipe(t_mini * mini);
+void		status_regulator_pipe(t_mini *mini);
 void		append_status_regulator(t_mini *mini, int type);
 void		heredoc_status_regulator(t_mini *mini, int type);
 void		run_cmd(t_mini *mini, char **command);
@@ -147,7 +154,8 @@ void		close_duplicate_fd(int fd[2]);
 void		pipe_checker(int fd[2]);
 int			command_list_count(t_mini *mini);
 
-void		onecommand_output_input_regulator(t_mini *mini, int i, int sq, int dq);
+void		onecommand_output_input_regulator(t_mini *mini, \
+				int i, int sq, int dq);
 void		output_input_regulator(t_mini *mini, int i, int fd[2]);
 int			output_input(t_mini *mini, int i, int sq, int dq);
 int			output_append_checker(t_mini *mini);
@@ -178,18 +186,15 @@ int			builtin_strcmp(char *s1, char *s2);
 void		check_builtin_status(t_mini *mini);
 void		check_builtin(t_mini *mini, int i);
 void		cd(t_mini *mini, char *newlocation);
-int			cd_case1(t_mini *mini, char **newlocation, char **newpwd, char *oldpwd);
 void		set_newlocation(char *oldpwd, char **newpwd, char *newlocation);
 char		*get_oldpwd(t_mini *mini);
-int			cd_case2(t_mini *mini, char **newpwd, char **newlocation, char *oldpwd);
 char		*get_home(t_mini *mini);
-int			chdir_situation(char *newpwd, char *newlocation, char *oldpwd);
 void		set_pwd(t_mini *mini, char *oldpwd, char *newpwd);
 void		set_newpwd2(char *newpwd, char **newpwd2);
 void		set_newpwd(t_mini *mini, char *newpwd, char *newpwd2, int i);
 void		set_oldpwd(t_mini *mini, char *oldpwd, int i);
-void	    pwd();
-void    	ft_exit(t_mini *mini, int i);
+void		pwd(void);
+void		ft_exit(t_mini *mini, int i);
 int			ft_isnumeric(char *str);
 int			ft_arg_count(char **str);
 int			exit_with_arg(t_mini *mini, int j, char **arg);
@@ -200,7 +205,5 @@ void		echo_flag_control(char **arg, int *i);
 int			flag_control(char *arg);
 int			execute_error(char *command, int i);
 void		ft_free_struct(t_mini *mini);
-
-
 
 #endif
