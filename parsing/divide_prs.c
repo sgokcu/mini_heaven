@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   divide_prs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:41 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 15:12:03 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 14:53:46 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ char	**mm_split(char *temp, char c)
 		return (NULL);
 	sub(temp, &ret, c);
 	free(temp);
+	temp = NULL;
 	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_filling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:49 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 17:18:14 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 16:46:04 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	taking_arg_redirect(char *str, t_mini *mini, int sq, int dq)
 	int	i;
 
 	i = 0;
-	struct_business(mini);
 	find_num_redirect(str, mini, 0, 0);
 	allocate(mini);
+	struct_business(mini);
 	while (str[i] && (quote_check(str[i], &sq, &dq), 1))
 	{
 		if (str[i] == '<' && str[i + 1] != '<'

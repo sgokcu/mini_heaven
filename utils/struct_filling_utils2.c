@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_filling_utils2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:06:31 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 17:00:14 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 16:36:15 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int is_valid_name(char *str, t_mini *mini, int sq, int dq)
 	char *tmp;
 
 	i = 0;
-	while (str[i] && (quote_check(str[i], &sq, &dq), 1)) // iflerde str[i + 1] var mı diye bakılacak
+	struct_business(mini);
+	while (str[i] && (quote_check(str[i], &sq, &dq), 1))
 	{
 		if ((str[i] == '<' && str[i + 1] != '<'
 			&& (dq % 2 == 0) && (sq % 2 == 0))

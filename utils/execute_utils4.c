@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:31:48 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 16:28:19 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 16:42:25 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,17 @@ void	ft_free_struct(t_mini *mini)
 			free(mini->arg);
 			mini->arg = NULL;
 		}
-		struct_business(mini);
+		if (mini->redirect)
+		{
+			printf("deneme1112\n");
+			free (mini->redirect);
+			mini->redirect = NULL;
+		}
+		if (mini->utils)
+		{
+			free (mini->utils);
+			mini->utils = NULL;
+		}
 		mini = mini->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:41:59 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 16:19:43 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 14:13:28 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	put_env(char *str, t_mini *mini)
 	d = env_count_full(mini);
 	mini->env[d] = ft_strdup(str);
 	mini->env[d + 1] = NULL;
+	free(str);
 }
 
 int	env_count_full(t_mini *mini)

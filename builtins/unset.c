@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:12 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 15:11:05 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 14:22:12 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	ft_start_unset(t_mini *mini)
 	valid = malloc(sizeof(char *) * (count_environ(keep)) + 1);
 	while_start_unset(keep, valid, &k);
 	to_make_it_shorter(mini, valid, &k);
+	free_env(keep);
+	free_env(valid);
 }
 
 void	ft_unset(t_mini *mini)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 15:08:40 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 14:53:57 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	exp_putting(t_mini *mini, char **keep, int *i)
 	{
 		put_env(delete_quotes(ft_strdup(keep[(*i)]), mini, 0, 0), mini);
 	}
+	free(hold);
 	(*i)++;
 }
 
@@ -82,18 +83,19 @@ void	ft_start_exp(t_mini *mini)
 	{
 		d = exp_control(keep, &i);
 		if (d == 0)
+		{
+			free_env(keep);
 			return ;
+		}
 		else if (d == 1)
 			continue ;
 		exp_contains_equal(keep, &i, 0, &control);
-		if (control == 1)
-		{
-			control = 0;
+		if (export_unset_control(&control) == 1)
 			continue ;
-		}
 		else
 			exp_putting(mini, keep, &i);
 	}
+	free_env(keep);
 }
 
 void	ft_export(t_mini *mini)
@@ -101,6 +103,7 @@ void	ft_export(t_mini *mini)
 	if (mini->flag_arg && mini->flag_arg[0])
 	{
 		ft_start_exp(mini);
+		
 	}
 	else
 		ft_env(mini, 1);

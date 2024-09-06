@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:47 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 20:00:50 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/06 15:46:28 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 int dollar_check(char	**str, int *i, t_mini *mini, int sq)
 {
-	char *hold;
+	//char *hold;
 
 	if ((*str)[(*i)] == '$' && ((*str)[(*i) + 1] == ' '
 		|| (*str)[(*i) + 1] == '\t' || (*str)[(*i) + 1] == '\0'))
 		(*i)++;
 	else if((*str)[(*i)] == '$' && ((*str)[(*i) + 1] == 34 || (*str)[(*i) + 1] == 39))
-	{
 		fill_space(*str, (*i), 1);
-		hold = dollar_business(*str, mini, &(*i));
-	}
 	else if((*str)[(*i)] == '$' && sq % 2 == 0)
 	{
 		dollar_working(mini, str, &(*i));
@@ -80,7 +77,6 @@ char *is_dollar_exist_and_valid(char *str, t_mini *mini)
 	sq = 0;
 	dq = 0;
 	i = 0;
-	struct_business(mini);
 	while(str[i] && (quote_check(str[i], &sq, &dq), 1))
 	{
 		if(str[i] == '$' && (str[i + 1] == '0' || str[i + 1] == '?')
