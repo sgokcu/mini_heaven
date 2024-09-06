@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:31:48 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 16:42:25 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/06 16:49:44 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_free_struct(t_mini *mini)
 		}
 		if (mini->redirect)
 		{
-			printf("deneme1112\n");
 			free (mini->redirect);
 			mini->redirect = NULL;
 		}
