@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:40 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/28 17:47:35 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 19:04:42 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	exit_with_arg(t_mini *mini, int j, char **arg)
 		if (!ft_isnumeric(arg[0]))
 			exit_with_error(mini, arg);
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		ft_free_dp(arg);
 		g_global_exit = 1;
 		return (1);
 	}

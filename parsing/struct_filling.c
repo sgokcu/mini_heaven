@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_filling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:49 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 18:47:02 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 19:00:24 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,6 @@ void	placing(char **args, t_mini *mini)
 	temp = mini;
 	while (args[i])
 	{
-		if (!args[i][0])
-			return ;
 		mini->arg = ft_strdup(args[i]);
 		taking_arg_redirect(args[i], mini, 0, i);
 		take_cmd(args[i], mini);
