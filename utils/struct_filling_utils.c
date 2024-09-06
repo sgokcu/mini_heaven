@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_filling_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:02:36 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 16:57:52 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/06 18:47:24 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 void	struct_business(t_mini *mini)
 {
-	if (mini->redirect)
-		free (mini->redirect);
 	mini->redirect = malloc(sizeof(t_redirect));
 	mini->redirect->output = 0;
 	mini->redirect->input = 0;
 	mini->redirect->heredoc = 0;
 	mini->redirect->append = 0;
-	if (mini->utils)
-		free (mini->utils);
 	mini->utils = malloc(sizeof(t_utils));
 	mini->utils->d = 0;
 	mini->utils->k = 0;

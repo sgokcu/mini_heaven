@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_filling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:49 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 17:01:47 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/06 18:47:02 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,15 @@ void	find_num_redirect(char *args, t_mini *mini, int dq, int sq)
 	}
 }
 
-void	taking_arg_redirect(char *str, t_mini *mini, int sq, int dq)
+void	taking_arg_redirect(char *str, t_mini *mini, int sq, int j)
 {
 	int	i;
+	int	dq;
 
 	i = 0;
-	struct_business(mini);
+	dq = 0;
+	if (j > 0)
+		struct_business(mini);
 	find_num_redirect(str, mini, 0, 0);
 	allocate(mini);
 	while (str[i] && (quote_check(str[i], &sq, &dq), 1))
@@ -127,7 +130,7 @@ void	placing(char **args, t_mini *mini)
 		if (!args[i][0])
 			return ;
 		mini->arg = ft_strdup(args[i]);
-		taking_arg_redirect(args[i], mini, 0, 0);
+		taking_arg_redirect(args[i], mini, 0, i);
 		take_cmd(args[i], mini);
 		if (check_same(mini->cmd, "export") && check_same(mini->cmd, "unset"))
 			args[i] = delete_quotes(args[i], mini, 0, 0);

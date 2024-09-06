@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/05 16:28:36 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/06 18:42:31 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,6 @@ void		echo_flag_control(char **arg, int *i);
 int			flag_control(char *arg);
 int			execute_error(char *command, int i);
 void		ft_free_struct(t_mini *mini);
+void		ft_free_for_structs(t_mini *temp);
 
 #endif
