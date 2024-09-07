@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:54 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 19:43:06 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 14:32:33 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ int	ft_split_arg(t_mini *mini, char *temp, char *temp2, char **temp3)
 	ft_signal_regulator(MAIN_P2);
 	if (!is_quotes_closed(temp2) || \
 	!is_valid_name(temp2, mini, 0, 0) || !pipe_check(temp2))
-		return (0);
-	*temp3 = is_dollar_exist_and_valid(temp2, mini);
+		return (free(temp2), 0);
+	*temp3 = ft_strdup(is_dollar_exist_and_valid(temp2, mini));
+		free(temp2);
 	if (!*temp3[0])
 	{
 		free(*temp3);

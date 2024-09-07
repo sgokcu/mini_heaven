@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:57:52 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 16:18:07 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/07 14:37:17 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	dollar_zero_question_free(char **str, char *hold, char *s1, char *s2)
 	line = ft_strjoin(hold, s2);
 	free(hold);
 	free(*str);
-	*str = line;
+	*str = ft_strdup(line);
 	free(s1);
 	free(s2);
+	free(line);
 }
 
 void	dollar_zero_question(char	**str, int *i)

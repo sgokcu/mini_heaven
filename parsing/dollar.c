@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:47 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 15:46:28 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 14:34:17 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int dollar_check(char	**str, int *i, t_mini *mini, int sq)
 {
-	//char *hold;
-
 	if ((*str)[(*i)] == '$' && ((*str)[(*i) + 1] == ' '
 		|| (*str)[(*i) + 1] == '\t' || (*str)[(*i) + 1] == '\0'))
 		(*i)++;
@@ -44,6 +42,7 @@ char *dollar_line(char *val, char *s1, char *s2, t_mini *mini)
 		hold = ft_strjoin(s1, value);
 		line = ft_strjoin(hold, s2);
 		free(hold);
+		free(value);
 	}
 	return (line);
 }
@@ -62,9 +61,10 @@ void dollar_working(t_mini *mini, char **str, int *i)
 	val = env_contains(hold, mini);
 	line = dollar_line(val, s1, s2, mini);
 	free(*str);
-	*str = line;
+	*str = ft_strdup(line);
 	free(s1);
 	free(s2);
+	free(line);
 	(*i) = 0;
 }
 
@@ -103,6 +103,8 @@ char	*val_redirect(char *s, t_mini *mini, int i, int j)
 	mini->utils->dq = 0;
 	while(s[i] && (quote_check(s[i], &mini->utils->sq, &mini->utils->dq), 1))
 		count_redirect(s, mini, &redirect, &i);
+	if(!redirect)
+		return (ft_strdup(s));
 	val = malloc((ft_strlen(s) + (redirect * 2) + 1));
 	i = 0;
 	while(s[i] && (quote_check(s[i], &mini->utils->sq, &mini->utils->dq), 1))
