@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 14:53:57 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 15:05:34 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_start_exp(t_mini *mini)
 
 	i = 0;
 	control = 0;
-	keep = mm_split(mini->flag_arg, ' ');
+	keep = mm_split(ft_strdup(mini->flag_arg), ' ');
 	while (keep[i])
 	{
 		d = exp_control(keep, &i);
@@ -101,10 +101,7 @@ void	ft_start_exp(t_mini *mini)
 void	ft_export(t_mini *mini)
 {
 	if (mini->flag_arg && mini->flag_arg[0])
-	{
 		ft_start_exp(mini);
-		
-	}
 	else
 		ft_env(mini, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:41:59 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 14:13:28 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 15:09:30 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 char	*export_business(char *str, t_mini *mini)
 {
 	char	*hold;
+	char	*temp;
 
 	take_name_for_export(delete_quotes(ft_strdup(str), mini, 0, 0), mini);
-	hold = ft_substr(delete_quotes(ft_strdup(str), mini, 0, 0), \
-	mini->redirect->start, mini->redirect->len);
+	temp = delete_quotes(ft_strdup(str), mini, 0, 0);
+	hold = ft_substr(temp, mini->redirect->start, mini->redirect->len);
+	free(temp);
 	return (hold);
 }
 
