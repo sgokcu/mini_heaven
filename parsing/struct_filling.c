@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:49 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 14:10:23 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 17:28:00 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	placing(char **args, t_mini *mini)
 		mini->arg = ft_strdup(args[i]);
 		taking_arg_redirect(args[i], mini, 0, i);
 		take_cmd(args[i], mini);
-		if (check_same(mini->cmd, "export") && check_same(mini->cmd, "unset"))
+		if (check_same(mini->cmd, "export") && check_same(mini->cmd, "unset") && check_same(mini->cmd, "echo"))
 			args[i] = delete_quotes(args[i], mini, 0, 0);
 		take_flag_arg(mini, args[i]);
 		status_regulator(mini, 0, 0, 0);

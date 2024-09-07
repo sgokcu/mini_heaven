@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 15:05:34 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 18:49:37 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,36 @@
 
 int	exp_control(char **keep, int *i)
 {
+	int control;
+
+	control = 0;
 	if (keep[0][0] == '-')
 	{
-		printf("export: invalid option\n");
+		ft_putstr_fd("minishell: export: ", 2);
+		ft_putstr_fd(keep[(0)], 2);
+		ft_putstr_fd(": invalid option\n", 2);
 		return (0);
 	}
 	if (((keep[(*i)][0] >= '0' && keep[(*i)][0] <= '9') \
 	|| keep[(*i)][0] == '='))
 	{
-		printf("export: '%s': not a valid identifier\n", keep[(*i)]);
+		ft_putstr_fd("minishell: export: ", 2);
+		ft_putchar_fd('`', 2);
+		ft_putstr_fd(keep[(*i)], 2);
+		ft_putchar_fd('`', 2);
+		ft_putstr_fd(": not a valid identifier\n", 2);
 		(*i)++;
 		return (1);
 	}
 	if (!ft_strchr(keep[(*i)], '='))
 	{
+		exp_contains_equal(keep, &(*i), 0, &control);
 		(*i)++;
+		if (control == 1)
+		{
+			control = 0;
+			(*i)--;
+		}
 		return (1);
 	}
 	return (-1);
@@ -36,18 +51,23 @@ int	exp_control(char **keep, int *i)
 
 void	exp_contains_equal(char **keep, int *i, int j, int *control)
 {
-	while (keep[(*i)][j] != '=')
+	while (keep[(*i)] && keep[(*i)][j] && keep[(*i)][j] != '=')
 	{
 		if (!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '_' \
 		&& keep[(*i)][j] != 34 && keep[(*i)][j] != 39)
 		{
-			printf("export: '%s': not a valid identifier\n", keep[(*i)]);
+			ft_putstr_fd("minishell: export: ", 2);
+			ft_putchar_fd('`', 2);
+			ft_putstr_fd(keep[(*i)], 2);
+			ft_putchar_fd('`', 2);
+			ft_putstr_fd(": not a valid identifier\n", 2);
 			(*i)++;
 			(*control) = 1;
 			break ;
 		}
 		j++;
 	}
+
 }
 
 void	exp_putting(t_mini *mini, char **keep, int *i)
@@ -89,7 +109,7 @@ void	ft_start_exp(t_mini *mini)
 		}
 		else if (d == 1)
 			continue ;
-		exp_contains_equal(keep, &i, 0, &control);
+		exp_contains_equal(keep, &i, 0, 0);
 		if (export_unset_control(&control) == 1)
 			continue ;
 		else

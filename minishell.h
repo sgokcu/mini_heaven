@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/06 18:42:31 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/07 18:32:54 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		quote_check(char temp, int *squotes, int *dquotes);
 char		**ft_split(char const *s, char c);
 int			pipe_check(char *str);
 char		*is_dollar_exist_and_valid(char *str, t_mini *mini);
+void		exp_contains_equal(char **keep, int *i, int j, int *control);
 char		*dollar_business(char *str, t_mini *mini, int *i);
 void		take_name_for_dollar(char *str, t_mini *mini);
 char		*val_redirect(char *str, t_mini *mini, int i, int j);

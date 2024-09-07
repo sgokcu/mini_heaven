@@ -6,18 +6,20 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:47 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 16:37:50 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 18:19:32 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int dollar_check(char	**str, int *i, t_mini *mini, int sq)
+int dollar_check(char	**str, int *i, t_mini *mini, int sq, int dq)
 {
 	if ((*str)[(*i)] == '$' && ((*str)[(*i) + 1] == ' '
-		|| (*str)[(*i) + 1] == '\t' || (*str)[(*i) + 1] == '\0'))
+		|| (*str)[(*i) + 1] == '\t' || (*str)[(*i) + 1] == '\0'
+		|| ((*str)[(*i) + 1] == 34 && dq % 2 != 0)
+		|| ((*str)[(*i) + 1] == 39 && sq % 2 != 0)))
 		(*i)++;
-	else if((*str)[(*i)] == '$' && ((*str)[(*i) + 1] == 34 || (*str)[(*i) + 1] == 39))
+	else if((*str)[(*i)] == '$' && (((*str)[(*i) + 1] == 34 && dq % 2 == 0) || ((*str)[(*i) + 1] == 39 && sq % 2 == 0)))
 		fill_space(*str, (*i), 1);
 	else if((*str)[(*i)] == '$' && sq % 2 == 0)
 	{
@@ -79,14 +81,12 @@ char *is_dollar_exist_and_valid(char *str, t_mini *mini)
 	i = 0;
 	while(str[i] && (quote_check(str[i], &sq, &dq), 1))
 	{
-		if(str[i] == '$' && (str[i + 1] == '0' || str[i + 1] == '?')
-			&& (str[i + 2] == ' ' || str[i + 2] == '\t'
-			|| str[i + 2] == '\0' || str[i + 2] == '$'))
+		if(str[i] == '$' && (str[i + 1] == '0' || str[i + 1] == '?') && sq % 2 == 0)
 		{
 			dollar_zero_question(&str, &i);
 			continue ;
 		}
-		if(dollar_check(&str, &i, mini, sq) == 1)
+		if(dollar_check(&str, &i, mini, sq, dq) == 1)
 			continue ;
 		i++;
 	}

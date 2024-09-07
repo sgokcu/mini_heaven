@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:54 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 16:59:35 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 17:06:40 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	ft_start(t_mini *mini, char **args, char *temp3)
 			continue ;
 		args = mm_split(temp3, '|');
 		placing(args, mini);
-		printf("deneme\n");
 		read_and_exec(mini, command_list_count(mini));
 		ft_free_dp(args);
 	}
