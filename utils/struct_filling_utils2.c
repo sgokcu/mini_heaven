@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:06:31 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 13:34:26 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 16:49:35 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int to_do_newline1(t_mini *mini, int *i, char *str, char **tmp)
 	take_name(str + (*i) + 1, mini);
 	*tmp =  ft_substr(str, mini->redirect->start, mini->redirect->len);
 	a = error_message_newline((*tmp), mini);
-	return (free(*tmp), a);
+	if (*tmp && *tmp[0])
+		free(*tmp);
+	return (a);
 }
 
 int to_do_newline2(t_mini *mini, int *i, char *str, char **tmp)
@@ -31,7 +33,9 @@ int to_do_newline2(t_mini *mini, int *i, char *str, char **tmp)
 	take_name(str + (*i) + 2, mini);
 	*tmp =  ft_substr(str, mini->redirect->start, mini->redirect->len);
 	a = error_message_newline((*tmp), mini);
-	return (free(*tmp), a);
+	if (*tmp && *tmp[0])
+		free(*tmp);
+	return (a);
 }
 
 int is_valid_name(char *str, t_mini *mini, int sq, int dq)

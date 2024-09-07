@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:04:47 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 19:58:18 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 16:56:46 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ int error_message_newline(char *tmp, t_mini *mini)
 	if(tmp[0] == '\0')
 	{
 		free(mini->redirect);
+		mini->redirect = NULL;
 		free(mini->utils);
+		mini->utils = NULL;
 		free(tmp);
 		printf("minishell: syntax error near unexpected token `newline'\n");
 		return (0);

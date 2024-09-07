@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:54 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 16:10:04 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/07 16:59:35 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ int	ft_split_arg(t_mini *mini, char *temp, char *temp2, char **temp3)
 	ft_signal_regulator(MAIN_P2);
 	if (!is_quotes_closed(temp2) || \
 	!is_valid_name(temp2, mini, 0, 0) || !pipe_check(temp2))
-		return (free(temp2), 0);
+		return (free(temp2), ft_free_for_structs(mini), 0);
 	*temp3 = is_dollar_exist_and_valid(temp2, mini);
 	if (!*temp3[0])
 	{
 		free(*temp3);
+		ft_free_for_structs(mini);
 		return (0);
 	}
 	return (1);
@@ -56,6 +57,7 @@ void	ft_start(t_mini *mini, char **args, char *temp3)
 			continue ;
 		args = mm_split(temp3, '|');
 		placing(args, mini);
+		printf("deneme\n");
 		read_and_exec(mini, command_list_count(mini));
 		ft_free_dp(args);
 	}
