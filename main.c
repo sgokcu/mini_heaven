@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:54 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 17:06:40 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 15:52:40 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_split_arg(t_mini *mini, char *temp, char *temp2, char **temp3)
 	if (!is_quotes_closed(temp2) || \
 	!is_valid_name(temp2, mini, 0, 0) || !pipe_check(temp2))
 		return (free(temp2), ft_free_for_structs(mini), 0);
-	*temp3 = is_dollar_exist_and_valid(temp2, mini);
+	*temp3 = is_dollar_exist_and_valid(temp2, mini, 0, 0);
 	if (!*temp3[0])
 	{
 		free(*temp3);
@@ -56,7 +56,7 @@ void	ft_start(t_mini *mini, char **args, char *temp3)
 		if (!ft_split_arg(mini, NULL, NULL, &temp3))
 			continue ;
 		args = mm_split(temp3, '|');
-		placing(args, mini);
+		placing(args, mini, 0);
 		read_and_exec(mini, command_list_count(mini));
 		ft_free_dp(args);
 	}

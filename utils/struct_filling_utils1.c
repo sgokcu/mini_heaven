@@ -6,13 +6,13 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:04:47 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 16:56:46 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 15:32:15 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void allocate_continue(t_mini *mini)
+void	allocate_continue(t_mini *mini)
 {
 	if (mini->redirect->heredoc != 0)
 	{
@@ -36,8 +36,8 @@ char	*delete_quotes(char *str, t_mini *mini, int i, int j)
 
 	mini->utils->dq = 0;
 	mini->utils->sq = 0;
-	while (str[i] &&
-		(quote_check(str[i], &mini->utils->sq, &mini->utils->dq), 1))
+	while (str[i]
+		&& (quote_check(str[i], &mini->utils->sq, &mini->utils->dq), 1))
 		i++;
 	j = ft_strlen(str) - (mini->utils->sq + mini->utils->dq);
 	hold = malloc(sizeof(char) * (j + 1));
@@ -45,8 +45,8 @@ char	*delete_quotes(char *str, t_mini *mini, int i, int j)
 		return (NULL);
 	j = 0;
 	i = 0;
-	while (str[i] &&
-		(quote_check(str[i], &mini->utils->sq, &mini->utils->dq), 1))
+	while (str[i]
+		&& (quote_check(str[i], &mini->utils->sq, &mini->utils->dq), 1))
 	{
 		if ((str[i] == 39 && mini->utils->dq % 2 == 0)
 			|| (str[i] == 34 && mini->utils->sq % 2 == 0))
@@ -59,18 +59,18 @@ char	*delete_quotes(char *str, t_mini *mini, int i, int j)
 	return (hold);
 }
 
-int is_quotes_closed(char *str)
+int	is_quotes_closed(char *str)
 {
-	int i;
-	int sq;
-	int dq;
+	int	i;
+	int	sq;
+	int	dq;
 
 	i = 0;
 	sq = 0;
 	dq = 0;
 	while (str[i] && (quote_check(str[i], &sq, &dq), 1))
 		i++;
-	if(sq % 2 != 0 || dq % 2 != 0)
+	if (sq % 2 != 0 || dq % 2 != 0)
 	{
 		printf("dquotes!\n");
 		g_global_exit = 258;
@@ -79,9 +79,9 @@ int is_quotes_closed(char *str)
 	return (1);
 }
 
-int error_message_newline(char *tmp, t_mini *mini)
+int	error_message_newline(char *tmp, t_mini *mini)
 {
-	if(tmp[0] == '\0')
+	if (tmp[0] == '\0')
 	{
 		free(mini->redirect);
 		mini->redirect = NULL;
@@ -94,7 +94,7 @@ int error_message_newline(char *tmp, t_mini *mini)
 	return (1);
 }
 
-void take_cmd(char *str, t_mini *mini)
+void	take_cmd(char *str, t_mini *mini)
 {
 	char	*temp;
 
@@ -106,8 +106,9 @@ void take_cmd(char *str, t_mini *mini)
 		return ;
 	}
 	mini->redirect->start = 0;
-	take_name(str , mini);
-	mini->cmd = delete_quotes(ft_substr(str, mini->redirect->start, mini->redirect->len), mini, 0, 0);
+	take_name(str, mini);
+	mini->cmd = delete_quotes(ft_substr(str, \
+		mini->redirect->start, mini->redirect->len), mini, 0, 0);
 	fill_space(str, mini->redirect->start, mini->redirect->len);
 	free(temp);
 }

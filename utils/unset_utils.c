@@ -6,17 +6,18 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:49:52 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/04 20:17:34 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 15:36:38 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void unset_typo(char **keep, int *i, int j, int *control)
+void	unset_typo(char **keep, int *i, int j, int *control)
 {
-	while(keep[(*i)][j])
+	while (keep[(*i)][j])
 	{
-		if(!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '#' && keep[(*i)][j] != '_')
+		if (!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '#'
+			&& keep[(*i)][j] != '_')
 		{
 			printf("unset: '%s': not a valid identifier\n", keep[(*i)]);
 			(*i)++;
@@ -27,18 +28,18 @@ void unset_typo(char **keep, int *i, int j, int *control)
 	}
 }
 
-int count_unsets(char **str, t_mini *mini, int i)
+int	count_unsets(char **str, t_mini *mini, int i)
 {
-	int j;
-	int count;
+	int	j;
+	int	count;
 
 	j = 0;
 	count = 0;
-	while(mini->env[i])
+	while (mini->env[i])
 	{
-		while(str[j])
+		while (str[j])
 		{
-			if(mini->env[i]
+			if (mini->env[i]
 				&& !ft_strncmp(mini->env[i], str[j], ft_strlen(str[j])))
 			{
 				count++;
@@ -55,14 +56,14 @@ int count_unsets(char **str, t_mini *mini, int i)
 	return (count);
 }
 
-void find_match(char **str, char **envi, int *control, int *i)
+void	find_match(char **str, char **envi, int *control, int *i)
 {
-	int j;
+	int	j;
 
 	j = 0;
-	while(str[j])
+	while (str[j])
 	{
-		if(!ft_strncmp(envi[(*i)], str[j], ft_strlen(str[j])))
+		if (!ft_strncmp(envi[(*i)], str[j], ft_strlen(str[j])))
 		{
 			(*i)++;
 			j = 0;
@@ -73,7 +74,7 @@ void find_match(char **str, char **envi, int *control, int *i)
 	}
 }
 
-void to_make_it_shorter(t_mini *mini, char **valid, int *k)
+void	to_make_it_shorter(t_mini *mini, char **valid, int *k)
 {
 	valid[(*k)] = NULL;
 	(*k) = 0;

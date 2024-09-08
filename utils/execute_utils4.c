@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:31:48 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 14:44:11 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 15:37:51 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_free_struct(t_mini *mini)
 int	status_check2(t_mini *mini)
 {
 	t_mini	*temp;
-	
+
 	temp = mini;
 	while (temp)
 	{

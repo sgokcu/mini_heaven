@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:02:36 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 16:53:15 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 16:03:50 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	take_name(char *args, t_mini *mini)
 		if ((mini->utils->dq % 2 == 0 && mini->utils->sq % 2 == 0)
 			&& ((args[i] == ' ' || args[i] == '\t')
 				|| (args[i] == '<' || args[i] == '>' || args[i] == '|'
-				|| args[i] == '$')))
+					|| (args[i] == '$' && ft_isalnum(args[i + 1])))))
 			break ;
 		i++;
 		mini->utils->j++;
@@ -68,14 +68,16 @@ void	imp(t_mini *mini, int *i, char *str, int n)
 	{
 		mini->redirect->start = (*i) + 1;
 		take_name(str + ((*i) + 1), mini);
-		mini->input[mini->utils->z++] = delete_quotes(ft_substr(str, mini->redirect->start, mini->redirect->len), mini, 0, 0);
-		fill_space(str, (*i), mini->utils->j + 1);	
+		mini->input[mini->utils->z++] = delete_quotes(ft_substr(str, \
+			mini->redirect->start, mini->redirect->len), mini, 0, 0);
+		fill_space(str, (*i), mini->utils->j + 1);
 	}
 	if (n == 2)
 	{
 		mini->redirect->start = (*i) + 1;
 		take_name(str + ((*i) + 1), mini);
-		mini->output[mini->utils->d++] = delete_quotes(ft_substr(str, mini->redirect->start, mini->redirect->len), mini, 0, 0);
+		mini->output[mini->utils->d++] = delete_quotes(ft_substr(str, \
+			mini->redirect->start, mini->redirect->len), mini, 0, 0);
 		fill_space(str, (*i), mini->utils->j + 1);
 	}
 }
@@ -86,7 +88,8 @@ void	imp2(t_mini *mini, int *i, char *str, int n)
 	{
 		mini->redirect->start = (*i) + 2;
 		take_name(str + ((*i) + 2), mini);
-		mini->heredoc[mini->utils->k++] = delete_quotes(ft_substr(str, mini->redirect->start, mini->redirect->len), mini, 0, 0);
+		mini->heredoc[mini->utils->k++] = delete_quotes(ft_substr(str, \
+			mini->redirect->start, mini->redirect->len), mini, 0, 0);
 		fill_space(str, (*i), mini->utils->j + 2);
 		i++;
 	}
@@ -94,7 +97,8 @@ void	imp2(t_mini *mini, int *i, char *str, int n)
 	{
 		mini->redirect->start = (*i) + 2;
 		take_name(str + ((*i) + 2), mini);
-		mini->append[mini->utils->l++] = delete_quotes(ft_substr(str, mini->redirect->start, mini->redirect->len), mini, 0, 0);
+		mini->append[mini->utils->l++] = delete_quotes(ft_substr(str, \
+			mini->redirect->start, mini->redirect->len), mini, 0, 0);
 		fill_space(str, (*i), mini->utils->j + 2);
 		i++;
 	}
@@ -118,4 +122,3 @@ void	allocate(t_mini *mini)
 	}
 	allocate_continue(mini);
 }
-

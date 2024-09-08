@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/08 13:59:27 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 15:48:50 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ typedef struct s_mini
 
 void		take_env(t_mini *mini);
 char		**mm_split(char *temp, char c);
-void		placing(char **args, t_mini *mini);
+void		placing(char **args, t_mini *mini, int i);
 void		quote_check(char temp, int *squotes, int *dquotes);
 char		**ft_split(char const *s, char c);
 int			pipe_check(char *str);
-char		*is_dollar_exist_and_valid(char *str, t_mini *mini);
+char		*is_dollar_exist_and_valid(char *str, t_mini *mini, int sq, int dq);
 void		exp_contains_equal(char **keep, int *i, int j, int *control);
 char		*dollar_business(char *str, t_mini *mini, int *i);
 void		take_name_for_dollar(char *str, t_mini *mini);

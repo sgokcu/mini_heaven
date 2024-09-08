@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:49 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 13:59:05 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 15:53:17 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,21 @@ void	taking_arg_redirect(char *str, t_mini *mini, int sq, int j)
 	}
 }
 
-int pipe_control(char *str, int *i, int *control)
+int	pipe_control(char *str, int *i, int *control)
 {
-	if(str[(*i)] == '|' && (*control) == 0)
+	if (str[(*i)] == '|' && (*control) == 0)
 	{
 		g_global_exit = 258;
 		printf("minishell: syntax error near unexpected token `|'\n");
 		return (0);
 	}
-	else if(str[(*i)] == '|' && str[(*i) + 1] != '\0')
+	else if (str[(*i)] == '|' && str[(*i) + 1] != '\0')
 	{
 		(*i)++;
 		(*control) = 0;
 		return (2);
 	}
-	else if(str[(*i)] == '\0' && (*control) == 1)
+	else if (str[(*i)] == '\0' && (*control) == 1)
 		return (1);
 	else
 	{
@@ -94,36 +94,32 @@ int pipe_control(char *str, int *i, int *control)
 	}
 }
 
-int pipe_check(char *str)
+int	pipe_check(char *str)
 {
-	int i;
-	int control;
-	int s;
+	int	i;
+	int	control;
+	int	s;
 
 	i = 0;
 	control = 0;
-	while(str[i])
+	while (str[i])
 	{
 		pipe_while(str, &i, &control);
 		s = pipe_control(str, &i, &control);
 		if (s == 0)
 			return (0);
-		else if(s == 2)
+		else if (s == 2)
 			continue ;
-		else if(s == 1)
+		else if (s == 1)
 			return (1);
 	}
 	return (1);
 }
 
-
-
-void	placing(char **args, t_mini *mini)
+void	placing(char **args, t_mini *mini, int i)
 {
-	int		i;
 	t_mini	*temp;
 
-	i = 0;
 	temp = mini;
 	while (args[i])
 	{
@@ -147,4 +143,3 @@ void	placing(char **args, t_mini *mini)
 	}
 	mini = temp;
 }
-

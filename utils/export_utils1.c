@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:46:32 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 13:59:21 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 15:27:40 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	export_unset_control(int *control)
 		return (0);
 }
 
-void make_it_short(char **keep, int *i)
+void	make_it_short(char **keep, int *i)
 {
 	ft_putstr_fd("minishell: export: ", 2);
 	ft_putchar_fd('`', 2);
