@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/08 17:08:29 by hosgor           ###   ########.fr       */
+/*   Updated: 2024/09/08 17:47:24 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ char		*make_lower(char *str);
 int			builtin_strcmp(char *s1, char *s2);
 void		check_builtin_status(t_mini *mini);
 void		check_builtin(t_mini *mini, int i);
-void		cd(t_mini *mini, char *newlocation);
+void		cd(t_mini *mini, char *newlocation, char *oldpwd, char *newpwd);
 void		set_newlocation(char *oldpwd, char **newpwd, char *newlocation);
 char		*get_oldpwd(t_mini *mini);
 char		*get_home(t_mini *mini);

@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:10:04 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/04 18:30:01 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 18:11:50 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ char	*get_cmd_path(t_mini *cmd, char **command, char **path, int i)
 		temp = ft_strjoin(path[i], "/");
 		temp2 = ft_strjoin(temp, command[0]);
 		if (!access(temp2, X_OK))
-		{
-			free(temp);
-			return (temp2);
-		}
+			return (free(temp), temp2);
 		free(temp);
 		free(temp2);
 	}
-	printf("minishell: %s: command not found\n", command[0]);
+	ft_putstr_fd("minishell: ", 2);
+	write(2, command[0], ft_strlen(command[0]));
+	ft_putstr_fd(": command not found\n", 2);
 	g_global_exit = 127;
 	exit(127);
 	return (NULL);

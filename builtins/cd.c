@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:30 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/08 17:08:05 by hosgor           ###   ########.fr       */
+/*   Updated: 2024/09/08 17:58:36 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,8 @@ void	set_pwd(t_mini *mini, char *oldpwd, char *newpwd)
 		free(newpwd2);
 }
 
-void	cd(t_mini *mini, char *newlocation)
+void	cd(t_mini *mini, char *newlocation, char *oldpwd, char *newpwd)
 {
-	char	*oldpwd;
-	char	*newpwd;
-
 	if (newlocation && newlocation[0] == '/')
 		newpwd = ft_strdup(newlocation);
 	oldpwd = getcwd(NULL, 0);

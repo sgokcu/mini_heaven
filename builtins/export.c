@@ -6,22 +6,20 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 14:57:39 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 18:08:50 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	exp_control(char **keep, int *i)
+int	exp_control(char **keep, int *i, int control)
 {
-	int	control;
-
-	control = 0;
 	if (keep[0][0] == '-')
 	{
 		ft_putstr_fd("minishell: export: ", 2);
 		ft_putstr_fd(keep[(0)], 2);
 		ft_putstr_fd(": invalid option\n", 2);
+		g_global_exit = 2;
 		return (0);
 	}
 	if (((keep[(*i)][0] >= '0' && keep[(*i)][0] <= '9') \
@@ -55,6 +53,7 @@ void	exp_contains_equal(char **keep, int *i, int j, int *control)
 			ft_putstr_fd(": not a valid identifier\n", 2);
 			(*i)++;
 			(*control) = 1;
+			g_global_exit = 1;
 			break ;
 		}
 		j++;
@@ -92,7 +91,7 @@ void	ft_start_exp(t_mini *mini)
 	keep = mm_split(ft_strdup(mini->flag_arg), ' ');
 	while (keep[i])
 	{
-		d = exp_control(keep, &i);
+		d = exp_control(keep, &i, 0);
 		if (d == 0)
 		{
 			free_env(keep);
@@ -100,7 +99,7 @@ void	ft_start_exp(t_mini *mini)
 		}
 		else if (d == 1)
 			continue ;
-		exp_contains_equal(keep, &i, 0, 0);
+		exp_contains_equal(keep, &i, 0, &control);
 		if (export_unset_control(&control) == 1)
 			continue ;
 		else

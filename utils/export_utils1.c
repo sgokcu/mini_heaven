@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:46:32 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 15:27:40 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 17:34:55 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	make_it_short(char **keep, int *i)
 	ft_putstr_fd(keep[(*i)], 2);
 	ft_putchar_fd('`', 2);
 	ft_putstr_fd(": not a valid identifier\n", 2);
+	g_global_exit = 1;
 	(*i)++;
 }

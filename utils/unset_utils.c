@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:49:52 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 15:36:38 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 17:37:30 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	unset_typo(char **keep, int *i, int j, int *control)
 			printf("unset: '%s': not a valid identifier\n", keep[(*i)]);
 			(*i)++;
 			(*control) = 1;
+			g_global_exit = 1;
 			break ;
 		}
 		j++;

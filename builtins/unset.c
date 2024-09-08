@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:12 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/06 14:22:12 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 17:36:21 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int	unset_check(char **keep, int *i)
 	if (keep[0][0] == '-')
 	{
 		printf("unset: invalid option\n");
+		g_global_exit = 2;
 		return (0);
 	}
 	if ((keep[(*i)][0] >= '0' && keep[(*i)][0] <= '9'))
 	{
 		printf("unset: '%s': not a valid identifier\n", keep[(*i)]);
 		(*i)++;
+		g_global_exit = 1;
 		return (1);
 	}
 	return (-1);
