@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:32 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/08/20 18:15:33 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/08 16:52:49 by hosgor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	builtin_strcmp(char *s1, char *s2)
 void	check_builtin(t_mini *mini, int i)
 {
 	if (mini->cmd && check_same(mini->cmd, "cd") == 0)
-		cd(mini, mini->flag_arg);
+		cd(mini, NULL, NULL, NULL);
 	else if (mini->cmd && check_same(mini->cmd, "pwd") == 0)
 		pwd();
 	else if (mini->cmd && check_same(mini->cmd, "exit") == 0)

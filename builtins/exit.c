@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:40 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/06 19:04:42 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 16:49:38 by hosgor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ int	exit_with_arg(t_mini *mini, int j, char **arg)
 	{
 		if (!ft_isnumeric(arg[0]))
 			exit_with_error(mini, arg);
+		g_global_exit = ft_atoi(mini->flag_arg);
 		ft_free_dp(arg);
 		ft_free_struct(mini);
 		ft_free_dp(mini->env);
-		g_global_exit = ft_atoi(mini->flag_arg);
-		exit (ft_atoi(mini->flag_arg));
+		exit (g_global_exit);
 	}
 	return (0);
 }

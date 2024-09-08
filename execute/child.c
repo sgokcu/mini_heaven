@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:43:56 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/05 16:55:49 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/08 16:50:15 by hosgor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	child_procces(t_mini *mini, char **command, int i)
 				run_cmd(mini, command);
 			else
 				check_builtin(mini, i);
-			exit(0);
+			exit(g_global_exit);
 		}
 	}
 	return ;
