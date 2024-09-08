@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:41 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 17:47:52 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 15:00:43 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,19 @@ int	pp_counter(char *temp, int squotes, int dquotes, char c)
 	return (d);
 }
 
-void	sub(char *temp, char ***ret, char c)
+void	sub(char *temp, char ***ret, char c, int j)
 {
 	int		i;
-	int		j;
 	int		d;
 	int		squotes;
 	int		dquotes;
 	char	*tmp;
 
-	i = 0;
-	j = 0;
+	i = -1;
 	d = 0;
 	squotes = 0;
 	dquotes = 0;
-	while (temp[i] && (quote_check(temp[i], &squotes, &dquotes), 1))
+	while (temp[++i] && (quote_check(temp[i], &squotes, &dquotes), 1))
 	{
 		if (temp[i] == c && (dquotes % 2 == 0 && squotes % 2 == 0))
 		{
@@ -58,7 +56,6 @@ void	sub(char *temp, char ***ret, char c)
 			j++;
 			d = i + 1;
 		}
-		i++;
 	}
 	tmp = ft_substr(temp, d, i - d);
 	(*ret)[j++] = ft_strtrim(tmp, " \t");
@@ -73,7 +70,7 @@ char	**mm_split(char *temp, char c)
 	ret = malloc(sizeof(char *) * (pp_counter(temp, 0, 0, c) + 1));
 	if (!ret)
 		return (NULL);
-	sub(temp, &ret, c);
+	sub(temp, &ret, c, 0);
 	free(temp);
 	temp = NULL;
 	return (ret);

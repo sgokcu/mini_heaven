@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/07 18:32:54 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 13:59:27 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void		take_name(char *args, t_mini *mini);
 void		imp(t_mini *mini, int *i, char *str, int n);
 void		imp2(t_mini *mini, int *i, char *str, int n);
 void		allocate(t_mini *mini);
+void		make_it_short(char **keep, int *i);
 void		allocate_continue(t_mini *mini);
 char		*delete_quotes(char *str, t_mini *mini, int i, int j);
 int			is_quotes_closed(char *str);

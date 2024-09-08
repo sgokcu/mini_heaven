@@ -6,20 +6,21 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:47 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 18:19:32 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 15:07:20 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int dollar_check(char	**str, int *i, t_mini *mini, int sq, int dq)
+int	dollar_check(char **str, int *i, t_mini *mini, int sq, int dq)
 {
 	if ((*str)[(*i)] == '$' && ((*str)[(*i) + 1] == ' '
 		|| (*str)[(*i) + 1] == '\t' || (*str)[(*i) + 1] == '\0'
 		|| ((*str)[(*i) + 1] == 34 && dq % 2 != 0)
 		|| ((*str)[(*i) + 1] == 39 && sq % 2 != 0)))
 		(*i)++;
-	else if((*str)[(*i)] == '$' && (((*str)[(*i) + 1] == 34 && dq % 2 == 0) || ((*str)[(*i) + 1] == 39 && sq % 2 == 0)))
+	else if((*str)[(*i)] == '$' && (((*str)[(*i) + 1] == 34 && dq % 2 == 0)
+		|| ((*str)[(*i) + 1] == 39 && sq % 2 == 0)))
 		fill_space(*str, (*i), 1);
 	else if((*str)[(*i)] == '$' && sq % 2 == 0)
 	{
@@ -106,8 +107,8 @@ char	*val_redirect(char *s, t_mini *mini, int i, int j)
 	if(!redirect)
 		return (ft_strdup(s));
 	val = malloc((ft_strlen(s) + (redirect * 2) + 1));
-	i = 0;
-	while(s[i] && (quote_check(s[i], &mini->utils->sq, &mini->utils->dq), 1))
+	i = -1;
+	while(s[++i] && (quote_check(s[i], &mini->utils->sq, &mini->utils->dq), 1))
 	{
 		if(s[i] == '<' && mini->utils->sq % 2 == 0)
 			put_quotes(val, &j, s, &i);
@@ -117,7 +118,6 @@ char	*val_redirect(char *s, t_mini *mini, int i, int j)
 			put_quotes(val, &j, s, &i);
 		else
 			val[j++] = s[i];
-		i++;
 	}
 	val[j] = '\0';
 	return (val);

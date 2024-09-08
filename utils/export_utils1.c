@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:46:32 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/05 16:20:10 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/08 13:59:21 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,14 @@ int	export_unset_control(int *control)
 	}
 	else
 		return (0);
+}
+
+void make_it_short(char **keep, int *i)
+{
+	ft_putstr_fd("minishell: export: ", 2);
+	ft_putchar_fd('`', 2);
+	ft_putstr_fd(keep[(*i)], 2);
+	ft_putchar_fd('`', 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
+	(*i)++;
 }

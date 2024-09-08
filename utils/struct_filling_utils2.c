@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:06:31 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/07 16:49:35 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 14:42:00 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int is_valid_name(char *str, t_mini *mini, int sq, int dq)
 	{
 		if ((str[i] == '<' && str[i + 1] != '<'
 			&& (dq % 2 == 0) && (sq % 2 == 0))
-			|| (str[i + 1] && str[i] == '>' && str[i + 1] != '>'
+			|| (str[i] == '>' && str[i + 1] != '>'
 			&& (dq % 2 == 0) && (sq % 2 == 0)))
 			{
 				if(!to_do_newline1(mini, &i, str, &tmp))
