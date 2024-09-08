@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/08 17:47:24 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 18:58:04 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int			to_do_newline1(t_mini *mini, int *i, char *str, char **tmp);
 int			to_do_newline2(t_mini *mini, int *i, char *str, char **tmp);
 int			is_valid_name(char *str, t_mini *mini, int sq, int dq);
 void		fill_space(char *str, int start, int len);
-void		pipe_while(char *str, int *i, int *control);
+void		pipe_while(char *str, int *i, int *control, int *quote);
 void		unset_typo(char **keep, int *i, int j, int *control);
 int			count_unsets(char **str, t_mini *mini, int i);
 void		find_match(char **str, char **envi, int *control, int *i);

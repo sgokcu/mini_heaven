@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:49 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 18:49:45 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 19:02:24 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	taking_arg_redirect(char *str, t_mini *mini, int sq, int j)
 	}
 }
 
-int	pipe_control(char *str, int *i, int *control)
+int	pipe_control(char *str, int *i, int *control, int *quote)
 {
-	if (str[(*i)] == '|' && (*control) == 0)
+	if (str[(*i)] == '|' && (*control) == 0 && *quote == 0)
 	{
 		g_global_exit = 258;
 		printf("minishell: syntax error near unexpected token `|'\n");
@@ -86,26 +86,28 @@ int	pipe_control(char *str, int *i, int *control)
 	}
 	else if (str[(*i)] == '\0' && (*control) == 1)
 		return (1);
-	else
+	else if (*quote == 0)
 	{
 		g_global_exit = 258;
 		printf("minishell: syntax error near unexpected token `|'\n");
-		return (0);
 	}
+	return (0);
 }
 
 int	pipe_check(char *str)
 {
-	int	i;
 	int	control;
+	int	quote;
+	int	i;
 	int	s;
 
 	i = 0;
 	control = 0;
+	quote = 0;
 	while (str[i])
 	{
-		pipe_while(str, &i, &control);
-		s = pipe_control(str, &i, &control);
+		pipe_while(str, &i, &control, &quote);
+		s = pipe_control(str, &i, &control, &quote);
 		if (s == 0)
 			return (0);
 		else if (s == 2)

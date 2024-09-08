@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:06:31 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 15:35:27 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/08 19:00:51 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,14 @@ void	fill_space(char *str, int start, int len)
 	}
 }
 
-void	pipe_while(char *str, int *i, int *control)
+void	pipe_while(char *str, int *i, int *control, int *quote)
 {
-	while (str[(*i)] && str[(*i)] != '|')
+	int	dq;
+	int	sq;
+
+	sq = 0;
+	dq = 0;
+	while (str[(*i)] && str[(*i)] != '|' && (quote_check(str[*i], &sq, &dq), 1))
 	{
 		if (str[(*i)] == '<' || str[(*i)] == '>')
 			(*control) = 0;
@@ -89,4 +94,6 @@ void	pipe_while(char *str, int *i, int *control)
 			(*control) = 1;
 		(*i)++;
 	}
+	if (sq % 2 != 0 || dq % 2 != 0)
+		*quote = 1;
 }
