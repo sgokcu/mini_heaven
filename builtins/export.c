@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 18:08:50 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/09 14:48:07 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	exp_control(char **keep, int *i, int control)
+int	exp_control(t_mini *mini, char **keep, int *i, int control)
 {
 	if (keep[0][0] == '-')
 	{
@@ -24,10 +24,10 @@ int	exp_control(char **keep, int *i, int control)
 	}
 	if (((keep[(*i)][0] >= '0' && keep[(*i)][0] <= '9') \
 	|| keep[(*i)][0] == '='))
-		return (make_it_short(keep, i), 1);
+		return (make_it_short(mini, keep, i), 1);
 	if (!ft_strchr(keep[(*i)], '='))
 	{
-		exp_contains_equal(keep, &(*i), 0, &control);
+		exp_contains_equal(mini, keep, &(*i), &control);
 		(*i)++;
 		if (control == 1)
 		{
@@ -39,18 +39,24 @@ int	exp_control(char **keep, int *i, int control)
 	return (-1);
 }
 
-void	exp_contains_equal(char **keep, int *i, int j, int *control)
+void	exp_contains_equal(t_mini *mini, char **keep, int *i, int *control)
 {
-	while (keep[(*i)] && keep[(*i)][j] && keep[(*i)][j] != '=')
+	int		sq;
+	int		dq;
+	int		j;
+
+	dq = 0;
+	sq = 0;
+	j = 0;
+	while (keep[(*i)] && keep[(*i)][j] && keep[(*i)][j] != '='
+	&& (quote_check(keep[(*i)][j], &sq, &dq), 1))
 	{
 		if (!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '_' \
-		&& keep[(*i)][j] != 34 && keep[(*i)][j] != 39)
+		&& ((keep[(*i)][j] == 34 && sq % 2 != 0)
+		|| (keep[(*i)][j] == 39 && dq % 2 != 0)))
 		{
-			ft_putstr_fd("minishell: export: ", 2);
-			ft_putchar_fd('`', 2);
-			ft_putstr_fd(keep[(*i)], 2);
-			ft_putchar_fd('`', 2);
-			ft_putstr_fd(": not a valid identifier\n", 2);
+			export_err_msg(delete_quotes(ft_strdup(keep[(*i)]), \
+			mini, 0, 0), 0);
 			(*i)++;
 			(*control) = 1;
 			g_global_exit = 1;
@@ -91,7 +97,7 @@ void	ft_start_exp(t_mini *mini)
 	keep = mm_split(ft_strdup(mini->flag_arg), ' ');
 	while (keep[i])
 	{
-		d = exp_control(keep, &i, 0);
+		d = exp_control(mini, keep, &i, 0);
 		if (d == 0)
 		{
 			free_env(keep);
@@ -99,7 +105,7 @@ void	ft_start_exp(t_mini *mini)
 		}
 		else if (d == 1)
 			continue ;
-		exp_contains_equal(keep, &i, 0, &control);
+		exp_contains_equal(mini, keep, &i, &control);
 		if (export_unset_control(&control) == 1)
 			continue ;
 		else

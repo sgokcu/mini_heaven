@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/09 10:30:39 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/09 14:49:36 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void		quote_check(char temp, int *squotes, int *dquotes);
 char		**ft_split(char const *s, char c);
 int			pipe_check(char *str);
 char		*is_dollar_exist_and_valid(char *str, t_mini *mini, int sq, int dq);
-void		exp_contains_equal(char **keep, int *i, int j, int *control);
+void		exp_contains_equal(t_mini *mini, char **keep, int *i, int *control);
 char		*dollar_business(char *str, t_mini *mini, int *i);
 void		take_name_for_dollar(char *str, t_mini *mini);
 char		*val_redirect(char *str, t_mini *mini, int i, int j);
@@ -119,22 +119,22 @@ void		take_name(char *args, t_mini *mini);
 void		imp(t_mini *mini, int *i, char *str, int n);
 void		imp2(t_mini *mini, int *i, char *str, int n);
 void		allocate(t_mini *mini);
-void		make_it_short(char **keep, int *i);
+void		make_it_short(t_mini *mini, char **keep, int *i);
 void		allocate_continue(t_mini *mini);
 char		*delete_quotes(char *str, t_mini *mini, int i, int j);
 int			is_quotes_closed(char *str);
 int			error_message_newline(char *tmp, t_mini *mini);
+void		export_err_msg(char	*str, int status);
 void		take_cmd(char *str, t_mini *mini);
 int			to_do_newline1(t_mini *mini, int *i, char *str, char **tmp);
 int			to_do_newline2(t_mini *mini, int *i, char *str, char **tmp);
 int			is_valid_name(char *str, t_mini *mini, int sq, int dq);
 void		fill_space(char *str, int start, int len);
 void		pipe_while(char *str, int *i, int *control, int *quote);
-void		unset_typo(char **keep, int *i, int j, int *control);
+void		unset_typo(t_mini *mini, char **keep, int *i, int *control);
 int			count_unsets(char **str, t_mini *mini, int i);
 void		find_match(char **str, char **envi, int *control, int *i);
 void		to_make_it_shorter(t_mini *mini, char **valid, int *k);
-//benim eklediklerim
 void		take_flag_arg(t_mini *mini, char *str);
 void		status_regulator(t_mini *mini, int i, int sq, int dq);
 void		status_regulator_pipe(t_mini *mini);
@@ -155,7 +155,6 @@ void		duplicate_default_fd(int fd[2]);
 void		close_duplicate_fd(int fd[2]);
 void		pipe_checker(int fd[2]);
 int			command_list_count(t_mini *mini);
-
 int			onecommand_output_input_regulator(t_mini *mini, \
 				int i, int sq, int dq);
 void		output_input_regulator(t_mini *mini, int i, int fd[2]);
@@ -168,7 +167,6 @@ int			if_append(t_mini *mini, int j, int sq, int dq);
 int			ft_open_output(t_mini *mini, int i);
 int			ft_open_append(t_mini *mini, int i);
 int			ft_open_input(t_mini *mini, int i);
-
 int			status_check(t_mini *temp);
 int			status_check2(t_mini *mini);
 void		heredoc_pipe(t_mini *mini, int fd[2], char **command);
@@ -179,12 +177,10 @@ void		fderror_2(char *str);
 int			ft_isdirectory(const char *str);
 int			is_fileordirectory(const char *str);
 int			ft_isfile(const char *path);
-
 void		ft_signal_regulator(int status);
 void		ft_main_signal(int signal);
 void		ft_main_signal2(int signal);
 void		ft_heredoc_signal(int signal);
-
 char		*make_lower(char *str);
 int			builtin_strcmp(char *s1, char *s2);
 void		check_builtin_status(t_mini *mini);

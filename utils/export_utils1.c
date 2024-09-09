@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:46:32 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 17:34:55 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/09 14:47:11 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	export_err_msg(char	*str, int status)
+{
+	if (status == 0)
+		ft_putstr_fd("minishell: export: ", 2);
+	else
+		ft_putstr_fd("minishell: unset: ", 2);
+	ft_putchar_fd('`', 2);
+	ft_putstr_fd(str, 2);
+	ft_putchar_fd('`', 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
+	free (str);
+}
 
 void	take_name_for_export(char *str, t_mini *mini)
 {
@@ -57,13 +70,9 @@ int	export_unset_control(int *control)
 		return (0);
 }
 
-void	make_it_short(char **keep, int *i)
+void	make_it_short(t_mini *mini, char **keep, int *i)
 {
-	ft_putstr_fd("minishell: export: ", 2);
-	ft_putchar_fd('`', 2);
-	ft_putstr_fd(keep[(*i)], 2);
-	ft_putchar_fd('`', 2);
-	ft_putstr_fd(": not a valid identifier\n", 2);
+	export_err_msg(delete_quotes(ft_strdup(keep[(*i)]), mini, 0, 0), 0);
 	g_global_exit = 1;
 	(*i)++;
 }

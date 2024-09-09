@@ -3,23 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   unset_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:49:52 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 17:37:30 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/09 14:33:33 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	unset_typo(char **keep, int *i, int j, int *control)
+void	unset_typo(t_mini *mini, char **keep, int *i, int *control)
 {
+	int	j;
+
+	j = 0;
 	while (keep[(*i)][j])
 	{
 		if (!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '#'
 			&& keep[(*i)][j] != '_')
 		{
-			printf("unset: '%s': not a valid identifier\n", keep[(*i)]);
+			export_err_msg(delete_quotes(ft_strdup(keep[(*i)]), \
+			mini, 0, 0), 1);
 			(*i)++;
 			(*control) = 1;
 			g_global_exit = 1;

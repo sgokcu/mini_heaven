@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:12 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/08 17:36:21 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/09 14:31:11 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	unset_check(char **keep, int *i)
 	return (-1);
 }
 
-void	while_start_unset(char **keep, char **valid, int *k)
+void	while_start_unset(t_mini *mini, char **keep, char **valid, int *k)
 {
 	int	s;
 	int	i;
@@ -45,7 +45,7 @@ void	while_start_unset(char **keep, char **valid, int *k)
 			return ;
 		else if (s == 1)
 			continue ;
-		unset_typo(keep, &i, 0, &control);
+		unset_typo(mini, keep, &i, &control);
 		if (export_unset_control(&control) == 1)
 			continue ;
 		else
@@ -91,10 +91,10 @@ void	ft_start_unset(t_mini *mini)
 
 	i = 0;
 	k = 0;
-	keep = mm_split(mini->flag_arg, ' ');
+	keep = mm_split(ft_strdup(mini->flag_arg), ' ');
 	valid = NULL;
 	valid = malloc(sizeof(char *) * (count_environ(keep)) + 1);
-	while_start_unset(keep, valid, &k);
+	while_start_unset(mini, keep, valid, &k);
 	to_make_it_shorter(mini, valid, &k);
 	free_env(keep);
 	free_env(valid);
