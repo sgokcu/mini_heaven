@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:35 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/09 10:36:27 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/09 11:41:51 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,33 @@ void	echo_flag_control(char **arg, int *i)
 	if (arg[*i] && arg[*i][0] == '-')
 		echo_flag_control(arg, i);
 }
+
+// void	echo_with_arg(t_mini *mini)
+// {
+// 	char	**arg;
+// 	char	*temp;
+// 	int		i;
+// 	int		flag;
+
+// 	i = 0;
+// 	flag = 0;
+// 	arg = mm_split(ft_strdup(mini->flag_arg), ' ');
+// 	if (arg[i][0] == '-')
+// 		echo_flag_control(arg, &i);
+// 	flag = i;
+// 	while (arg[i])
+// 	{
+// 		temp = delete_quotes(arg[i], mini, 0, 0);
+// 		printf("%s", temp);
+// 		free (temp);
+// 		if (arg[i + 1])
+// 			printf(" ");
+// 		i++;
+// 	}
+// 	if (!flag && arg[flag])
+// 		printf("\n");
+// 	free (arg);
+// }
 
 void	echo_with_arg(t_mini *mini)
 {

@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:32 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/09 09:51:15 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/09 11:45:47 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	check_builtin(t_mini *mini, int i)
 	if (mini->cmd && check_same(mini->cmd, "cd") == 0)
 	{
 		if (mini->flag_arg && mini->flag_arg[0])
-			ft_takenewloc(mini);	
+			ft_takenewloc(mini);
 		cd(mini, mini->flag_arg, NULL, NULL);
 	}
 	else if (mini->cmd && check_same(mini->cmd, "pwd") == 0)

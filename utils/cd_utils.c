@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:21 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/09 09:49:35 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/09 11:44:23 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	ft_isfile(const char *path)
 		return (0);
 	return (S_ISREG(path_stat.st_mode));
 }
+
 void	ft_takenewloc(t_mini *mini)
 {
 	char	*temp;
