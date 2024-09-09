@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/08 18:58:04 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/09 09:50:05 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void		fderror_1(char *str);
 void		fderror_2(char *str);
 int			ft_isdirectory(const char *str);
 int			is_fileordirectory(const char *str);
+int			ft_isfile(const char *path);
 
 void		ft_signal_regulator(int status);
 void		ft_main_signal(int signal);
@@ -189,6 +190,7 @@ int			builtin_strcmp(char *s1, char *s2);
 void		check_builtin_status(t_mini *mini);
 void		check_builtin(t_mini *mini, int i);
 void		cd(t_mini *mini, char *newlocation, char *oldpwd, char *newpwd);
+void		ft_takenewloc(t_mini *mini);
 void		set_newlocation(char *oldpwd, char **newpwd, char *newlocation);
 char		*get_oldpwd(t_mini *mini);
 char		*get_home(t_mini *mini);
