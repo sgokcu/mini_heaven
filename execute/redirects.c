@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:57:08 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/09 11:44:46 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/09 17:34:42 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,6 @@ void	output_input_regulator(t_mini *mini, int i, int fd[2])
 		close(fd[1]);
 		onecommand_output_input_regulator(mini, i, 0, 0);
 	}
-	else if (output_append_checker(mini) == 2)
+	else
 		onecommand_output_input_regulator(mini, i, 0, 0);
 }
