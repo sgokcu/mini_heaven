@@ -6,7 +6,7 @@
 /*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 20:04:47 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/09 16:43:54 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/09 16:47:17 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int	error_message_newline(char *tmp, t_mini *mini)
 		free(mini->utils);
 		mini->utils = NULL;
 		free(tmp);
-		ft_putstr_fd\
-		("minishell: syntax error near unexpected token `newline'\n", 2);
+		ft_putstr_fd("minishell: syntax error near ", 2);
+		ft_putstr_fd("unexpected token `newline'\n", 2);
 		return (0);
 	}
 	return (1);
