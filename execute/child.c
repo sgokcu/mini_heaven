@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosgor <hosgor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:43:56 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/08 16:50:15 by hosgor           ###   ########.fr       */
+/*   Updated: 2024/09/09 10:31:22 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	onecommand_output_input_regulator(t_mini *mini, int i, int sq, int dq)
+int	onecommand_output_input_regulator(t_mini *mini, int i, int sq, int dq)
 {
 	int	fd;
 
@@ -22,6 +22,9 @@ void	onecommand_output_input_regulator(t_mini *mini, int i, int sq, int dq)
 		dup2(fd, 1);
 		close (fd);
 	}
+	if (fd < 0)
+		return (0);
+	return (1);
 }
 
 void	child_procces(t_mini *mini, char **command, int i)
@@ -31,7 +34,8 @@ void	child_procces(t_mini *mini, char **command, int i)
 	check_builtin_status(mini);
 	if (i == 1 && mini->status == BUILTIN)
 	{
-		onecommand_output_input_regulator(mini, i, 0, 0);
+		if (!onecommand_output_input_regulator(mini, i, 0, 0))
+			return ;
 		check_builtin(mini, i);
 	}
 	else

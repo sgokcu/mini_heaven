@@ -6,7 +6,7 @@
 /*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 16:06:48 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/09 09:50:05 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/09 10:30:39 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void		close_duplicate_fd(int fd[2]);
 void		pipe_checker(int fd[2]);
 int			command_list_count(t_mini *mini);
 
-void		onecommand_output_input_regulator(t_mini *mini, \
+int			onecommand_output_input_regulator(t_mini *mini, \
 				int i, int sq, int dq);
 void		output_input_regulator(t_mini *mini, int i, int fd[2]);
 int			output_input(t_mini *mini, int i, int sq, int dq);

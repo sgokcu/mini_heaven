@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 18:15:35 by fhosgor           #+#    #+#             */
-/*   Updated: 2024/09/07 17:30:15 by sgokcu           ###   ########.fr       */
+/*   Updated: 2024/09/09 10:36:27 by fhosgor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,25 @@ void	echo_flag_control(char **arg, int *i)
 void	echo_with_arg(t_mini *mini)
 {
 	char	**arg;
-	char	*temp;
 	int		i;
 	int		flag;
 
 	i = 0;
 	flag = 0;
-	arg = mm_split(ft_strdup(mini->flag_arg), ' ');
+	arg = ft_split(mini->flag_arg, ' ');
 	if (arg[i][0] == '-')
 		echo_flag_control(arg, &i);
 	flag = i;
 	while (arg[i])
 	{
-		temp = delete_quotes(arg[i], mini, 0, 0);
-		printf("%s", temp);
-		free (temp);
+		printf("%s", arg[i]);
 		if (arg[i + 1])
 			printf(" ");
 		i++;
 	}
 	if (!flag && arg[flag])
 		printf("\n");
-	free (arg);
+	ft_free_dp(arg);
 }
 
 void	ft_echo(t_mini *mini)
