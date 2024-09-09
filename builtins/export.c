@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:24:07 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/09 14:48:07 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/09 16:40:14 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	exp_contains_equal(t_mini *mini, char **keep, int *i, int *control)
 	while (keep[(*i)] && keep[(*i)][j] && keep[(*i)][j] != '='
 	&& (quote_check(keep[(*i)][j], &sq, &dq), 1))
 	{
-		if (!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '_' \
-		&& ((keep[(*i)][j] == 34 && sq % 2 != 0)
-		|| (keep[(*i)][j] == 39 && dq % 2 != 0)))
+		if ((!(ft_isalnum(keep[(*i)][j])) && keep[(*i)][j] != '_')
+		|| ((keep[(*i)][j] == 34 && sq % 2 != 0) || (keep[(*i)][j] == 39
+		&& dq % 2 != 0)))
 		{
 			export_err_msg(delete_quotes(ft_strdup(keep[(*i)]), \
 			mini, 0, 0), 0);

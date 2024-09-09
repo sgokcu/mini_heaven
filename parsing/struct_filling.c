@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_filling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fhosgor <fhosgor@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sgokcu <sgokcu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 18:23:49 by sgokcu            #+#    #+#             */
-/*   Updated: 2024/09/09 12:06:58 by fhosgor          ###   ########.fr       */
+/*   Updated: 2024/09/09 16:32:56 by sgokcu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	pipe_control(char *str, int *i, int *control, int *quote)
 	if (str[(*i)] == '|' && (*control) == 0 && *quote == 0)
 	{
 		g_global_exit = 258;
-		printf("minishell: syntax error near unexpected token `|'\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		return (0);
 	}
 	else if (str[(*i)] == '|' && str[(*i) + 1] != '\0')
@@ -89,7 +89,7 @@ int	pipe_control(char *str, int *i, int *control, int *quote)
 	else if (*quote == 0)
 	{
 		g_global_exit = 258;
-		printf("minishell: syntax error near unexpected token `|'\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 	}
 	return (0);
 }
@@ -136,6 +136,8 @@ void	placing(char **args, t_mini *mini, int i)
 		{
 			status_regulator_pipe(mini);
 			mini->next = malloc(sizeof(t_mini));
+			mini->next->redirect = NULL;
+			mini->next->utils = NULL;
 			mini->next->env = mini->env;
 			mini = mini->next;
 		}
